@@ -1,5 +1,6 @@
 import './Nav.css'
 import { navSvg , homeSvg, shopSvg, userProfileSvg } from './NavSvgs'
+import { Link  } from 'react-router-dom';
 import NavItem from './NavItem'
 
 const Nav = () => {
@@ -8,10 +9,10 @@ const Nav = () => {
       <nav id="navbar">
         <ul id="navbarNav" >
           <li className="logo" >
-            <a  className="navLink">
+            <Link to="/" className="navLink">
               <span className="linkText logoText">CityCake</span>
               {navSvg}
-            </a>
+            </Link>
           </li>
 
           <NavItem linkText="Home" linkAddress="/" iconSvg={homeSvg}/>

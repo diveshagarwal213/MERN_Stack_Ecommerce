@@ -1,13 +1,5 @@
-import { homeSvg } from './NavSvgs'
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-//Name, link
-{/* <li className="navItem">
-    <a className="navLink">
-        {homeSvg}
-        <span className="linkText">Home</span>
-    </a>
-</li> */}
 
 const NavItem = (props) => {
     return (
