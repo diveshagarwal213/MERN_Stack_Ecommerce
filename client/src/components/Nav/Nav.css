@@ -2,7 +2,8 @@
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 600ms ease;
-     overflow: scroll;
+    overflow: scroll;
+    z-index: 99;
 }
 #navbar::-webkit-scrollbar{
     display: none;

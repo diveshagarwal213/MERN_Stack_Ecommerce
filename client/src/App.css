@@ -18,7 +18,7 @@ body {
     --bg-primary: #23232e;
     --bg-secondary: #141418;
     --transition-speed: 600ms;
-    --icons-color:#df49a6;
+    --icons-color:#df49d8;
 }
 
 /* width */
@@ -38,13 +38,11 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: lightblue;
+    background: var(--icons-color);
 }
 
 #main {
-    border: 1px solid green;
     margin-left: 5rem;
-    padding: 1rem;
 }
 
 @media only screen and (max-width: 600px) {
