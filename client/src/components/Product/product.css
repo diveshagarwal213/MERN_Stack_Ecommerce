@@ -18,7 +18,18 @@
 }
 .productCard_img ~ div{
     padding-bottom: 10px;
-    line-height: .8;
+    line-height: 1;
+}
+
+.product_card_div h3 {
+    font-weight: 400;
+    text-transform: capitalize;
+    font-size: 16px;
+}
+.product_card_div p {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--icons-color);
 }
 
 .product_card_div button{

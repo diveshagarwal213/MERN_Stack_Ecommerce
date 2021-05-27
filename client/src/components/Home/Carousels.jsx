@@ -1,6 +1,5 @@
 import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 
 import {ProductCard} from '../Product/Product'
 
@@ -8,8 +7,12 @@ const HeadCarousel =  () => {
     const HeadCarItem = props => {
         return(
             <div className='item' style={{ backgroundImage: `url('${props.img_url}')`}} >
-                <h4>{props.h4}</h4>
-                <p>{props.text}</p>
+                <div className='HeadCarItemContent'>
+                  <h1>{props.h4}</h1>
+                  <p>{props.text}</p>
+                  <button>any button</button>
+                </div>
+                <div className='shadow'></div>
             </div>
         );
     }
@@ -18,7 +21,7 @@ const HeadCarousel =  () => {
     <>
       <div id="head_carousel" >
         <OwlCarousel className='owl-theme' items={1} margin={0} autoplay ={true} loop nav autoplayTimeout={7000}  >
-            <HeadCarItem h4="1" text="example" img_url="https://source.unsplash.com/r1jXVa8wPFs" />
+          <HeadCarItem h4="We implement your Delicious Dreams!" text="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium" img_url="https://source.unsplash.com/r1jXVa8wPFs" />
             <HeadCarItem h4="2" text="example" img_url="https://source.unsplash.com/d15KvLtJnyU" />
             <HeadCarItem h4="3" text="example" img_url="https://source.unsplash.com/cKJ8ZxQ2bC8" />
         </OwlCarousel>
@@ -67,5 +70,6 @@ const HomeProductCaro =  (props) => {
     </>
   );
 };
+
 
 export {HeadCarousel, HomeProductCaro};

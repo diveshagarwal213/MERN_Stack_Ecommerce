@@ -1,28 +1,32 @@
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './home.css'
 import {HeadCarousel, HomeProductCaro} from './Carousels';
+//images
+import cupcakePng from '../../images/cupcake.png'
 
 const data =[
   {
     pid:0,
-    name:"abc0",
+    name:"example ",
     image:"https://source.unsplash.com/NyQwVPacW00",
     price:"200"
   },
   {
     pid:1,
-    name:"abc1",
+    name:"example 1",
     image:"https://source.unsplash.com/qJ0zGkrE1Zg",
     price:"350"
   },
   {
     pid:2,
-    name:"abc2",
+    name:"example 2",
     image:"https://source.unsplash.com/hUNfnnurygs",
     price:"250"
   },
   {
     pid:3,
-    name:"abc3",
+    name:"example 3",
     image:"https://source.unsplash.com/diUixdrqh0Q",
     price:"400"
   },
@@ -32,6 +36,11 @@ const CenterHeading =  props => {
     return(
         <div id="center_heading" >
             <h2>{props.heading}</h2>
+            <div id="center_heading_icons">
+              <div></div>
+              <img src={cupcakePng} alt="sweet" />
+              <div></div>
+            </div>
         </div>
     )
 };
@@ -39,12 +48,12 @@ const CenterHeading =  props => {
 function Home() {
 
   return (
-    <>
+    <div id="home">
       <HeadCarousel />
-      <CenterHeading heading="NEW PRODUCTS" />
+      <CenterHeading heading="most popular" />
       <HomeProductCaro data={data}/>
       <div id="empty"></div>
-    </>
+    </div>
   );
 }
 
