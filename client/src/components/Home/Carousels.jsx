@@ -2,10 +2,12 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+import {ProductCard} from '../Product/Product'
+
 const HeadCarousel =  () => {
     const HeadCarItem = props => {
         return(
-            <div class='item' style={{ backgroundImage: `url('${props.img_url}')`}} >
+            <div className='item' style={{ backgroundImage: `url('${props.img_url}')`}} >
                 <h4>{props.h4}</h4>
                 <p>{props.text}</p>
             </div>
@@ -26,18 +28,12 @@ const HeadCarousel =  () => {
   );
 };
 
-const ProductCard =  props => {
-  return(
-    <div class='item'  >
-      <div className="productCard_img" style={{ backgroundImage: `url('${props.img_url}')` }} ></div>
-      <div>
-        <h3>{props.pName}</h3>
-      </div>
-    </div>
-  )
-};
 
-const HomeProductCaro =  () => {
+const HomeProductCaro =  (props) => {
+
+  const data = props.data;
+  //data must contain => Key, name, image, price
+
   return (
     <>
       <div id="home_product_Caro" >
@@ -61,12 +57,10 @@ const HomeProductCaro =  () => {
           }
           }} 
         >
-            <ProductCard pName="abc" img_url="https://source.unsplash.com/qJ0zGkrE1Zg" />
-            <ProductCard pName="abc2" img_url="https://source.unsplash.com/NyQwVPacW00" />
-            <ProductCard pName="abc3" img_url="https://source.unsplash.com/hUNfnnurygs" />
-            <ProductCard pName="abc4" img_url="https://source.unsplash.com/diUixdrqh0Q" />
-            <ProductCard pName="abc5" img_url="https://source.unsplash.com/BrlulMlg82c" />
-            <ProductCard pName="abc3" img_url="https://source.unsplash.com/4rfVL3NNGrA" />
+            {data.map( c => (
+              <ProductCard key={c.pid} pName={c.name} img_url={c.image} pId={c.pid} price={c.price} />
+            ))}
+
         </OwlCarousel>
       </div>
       

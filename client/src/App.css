@@ -41,6 +41,12 @@ body {
     background: var(--icons-color);
 }
 
+button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
 #main {
     margin-left: 5rem;
 }
