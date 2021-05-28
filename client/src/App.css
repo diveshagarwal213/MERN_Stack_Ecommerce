@@ -52,6 +52,9 @@ button{
 #main {
     margin-left: 5rem;
 }
+#empty {
+    height: 130px;
+}
 
 @media only screen and (max-width: 600px) {
     #main {

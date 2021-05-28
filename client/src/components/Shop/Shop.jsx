@@ -1,4 +1,9 @@
+import useDocTitle from "../../hooks/useDocTitle";
+
 const Shop = () => {
+
+    useDocTitle('Shop |')
+
     return(
         <>
             <h1>this is Shop</h1>

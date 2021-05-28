@@ -1,7 +1,10 @@
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import './home.css'
+import './HomePage.scss'
 import {HeadCarousel, HomeProductCaro} from './Carousels';
+
+//custom hooks
+import useDocTitle from '../../hooks/useDocTitle';
 //images
 import cupcakePng from '../../images/cupcake.png'
 
@@ -46,6 +49,8 @@ const CenterHeading =  props => {
 };
 
 function Home() {
+
+  useDocTitle('');
 
   return (
     <div id="home">
