@@ -1,7 +1,7 @@
 import './Product.scss';
 import { Link } from 'react-router-dom';
 
-function addToCartHandler(e) {
+function AddToCartHandler(e) {
     let pId = e.target.getAttribute("data-id");
     console.log(pId);
 }
@@ -16,9 +16,9 @@ const ProductCard = props => {
                     <p>₹ {props.price}</p>
                 </div>
             </Link>
-            <button onClick={addToCartHandler} data-id={props.pId} >Add to Cart</button>
+            <button onClick={AddToCartHandler} data-id={props.pId} >Add to Cart</button>
         </div>
     )
 };
 
-export { ProductCard };
+export { ProductCard, AddToCartHandler };

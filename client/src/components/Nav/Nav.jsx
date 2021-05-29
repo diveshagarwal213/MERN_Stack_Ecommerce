@@ -17,6 +17,7 @@ const Nav = () => {
 
           <NavItem linkText="Home" linkAddress="/" iconSvg={homeSvg}/>
           <NavItem linkText="Shop" linkAddress="/shop" iconSvg={shopSvg}/>
+          <NavItem linkText="Cart" linkAddress="/usercart" iconSvg={userProfileSvg}/>
           <NavItem linkText="User" linkAddress="/userprofile" iconSvg={userProfileSvg}/>
 
           
