@@ -7,6 +7,8 @@ import {HeadCarousel, HomeProductCaro} from './Carousels';
 import useDocTitle from '../../hooks/useDocTitle';
 //images
 import cupcakePng from '../../images/cupcake.png'
+import { useContext } from 'react';
+import { CountContext } from '../../App';
 
 const data =[
   {

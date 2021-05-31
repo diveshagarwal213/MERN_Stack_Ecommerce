@@ -1,25 +1,24 @@
+import { useContext } from 'react';
+import { CartContext } from '../../App'
 import CartProducts from "./CartProductCard";
 
-const data = [
-    {
-        pid: 0,
-        name: "example ",
-        image: "https://source.unsplash.com/NyQwVPacW00",
-        price: "200"
-    },
-    {
-        pid: 1,
-        name: "example 1",
-        image: "https://source.unsplash.com/qJ0zGkrE1Zg",
-        price: "350"
-    }
-]
+
+const data = {
+    id: 0,
+    name: "example ",
+    image: "https://source.unsplash.com/NyQwVPacW00",
+    price: "200"
+}
 
 const UserCart = () => {
+    //console.log(products);
+    const cartContext = useContext(CartContext);
     return (
         <div>
             <h1>this is user cart</h1>
-            <CartProducts data={data} />
+            <CartProducts />
+            <button onClick={() => cartContext.cartDispatch({ type: 'onAdd', product: data})} >add</button>
+            <button onClick={() => cartContext.cartDispatch({ type: 'onRemove', product: data})} >remove</button>
         </div>
     )
 };
