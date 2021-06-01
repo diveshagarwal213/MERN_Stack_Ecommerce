@@ -1,4 +1,4 @@
-import {AddToCartHandler} from './Product'
+
 
 const data = {
     pid: 0,
@@ -22,7 +22,7 @@ const ProductD = (props) => {
                 <h1>{props.name}</h1>
                 <h3>₹ {props.price}</h3>
                 <p> {props.about} </p>
-                <button onClick={AddToCartHandler} data-id={props.id} >Add to Cart</button>
+                <button  >Add to Cart</button>
                 <p>ID: {props.id}</p>
                 <p>Categories : {categories}</p>
 

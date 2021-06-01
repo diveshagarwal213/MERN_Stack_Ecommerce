@@ -60,8 +60,8 @@ const HomeProductCaro =  (props) => {
           }
           }} 
         >
-            {data.map( c => (
-              <ProductCard key={c.pid} pName={c.name} img_url={c.image} pId={c.pid} price={c.price} />
+            {data.map( product => (
+              <ProductCard key={product.pid} product={product} />
             ))}
 
         </OwlCarousel>

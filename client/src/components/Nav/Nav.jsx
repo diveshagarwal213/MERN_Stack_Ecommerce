@@ -1,9 +1,16 @@
 import './Nav.css'
-import { navSvg , homeSvg, shopSvg, userProfileSvg } from './NavSvgs'
-import { Link  } from 'react-router-dom';
+import { navSvg , homeSvg, shopSvg, userProfileSvg, basketSvg } from './NavSvgs'
+import { Link ,NavLink } from 'react-router-dom';
 import NavItem from './NavItem'
+import { useContext } from 'react';
+
+import {CartContext} from '../../App';
+
 
 const Nav = () => {
+  const cartContext = useContext(CartContext);
+  const cartitems = cartContext.cartState;
+
   return (
     <>
       <nav id="navbar">
@@ -17,7 +24,18 @@ const Nav = () => {
 
           <NavItem linkText="Home" linkAddress="/" iconSvg={homeSvg}/>
           <NavItem linkText="Shop" linkAddress="/shop" iconSvg={shopSvg}/>
-          <NavItem linkText="Cart" linkAddress="/usercart" iconSvg={userProfileSvg}/>
+
+          <li className="navItem">
+            <NavLink exact className="navLink" activeClassName="active" to='/usercart' >
+              <div className='cart_lengthDiv'>
+                {basketSvg}
+                {cartitems.length !== 0 && (<span className='cart_length' >{cartitems.length}</span>)}
+                
+              </div>
+                <span className="linkText">Cart</span>
+            </NavLink>
+          </li>
+          
           <NavItem linkText="User" linkAddress="/userprofile" iconSvg={userProfileSvg}/>
 
           

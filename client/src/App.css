@@ -20,6 +20,8 @@ body {
     --bg-secondary: #141418;
     --transition-speed: 600ms;
     --icons-color:#df49d8;
+    --nav-dot: white;
+    --nav-dot-text: #df49d8;
    /*  --icons-color:#ff9999; */
 }
 

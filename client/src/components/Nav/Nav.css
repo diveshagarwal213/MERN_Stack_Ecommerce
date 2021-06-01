@@ -49,6 +49,21 @@
     color: var(--text-secondary);
 }
 
+.cart_lengthDiv{
+    position: relative;
+}
+
+.cart_length{
+    border-radius: 10px;
+    font-size: x-small;
+    padding: 5px 5px ;
+    color: var(--nav-dot-text);
+    background-color: var(--nav-dot);
+    position: absolute;
+    top: 0;
+    left: 55%;
+}
+
 .linkText {
     display: none;
     margin-left: 1rem;
