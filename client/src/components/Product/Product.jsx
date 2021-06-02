@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import {CartContext} from '../../App'
 
+// product { pid image name price } 
+
 const ProductCard = (props) => {
     const {product} = props;
 

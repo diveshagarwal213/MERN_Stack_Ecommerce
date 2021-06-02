@@ -40,23 +40,25 @@ const HomeProductCaro =  (props) => {
   return (
     <>
       <div id="home_product_Caro" >
-        <OwlCarousel className='owl-theme'  margin={10} autoplay ={true} loop autoplayTimeout={5000} 
+        <OwlCarousel className='owl-theme'  margin={10} autoplay ={true} loop={true} autoplayTimeout={5000} autoplayHoverPause nav
+
+          pullDrag={false}
+          touchDrag={false}
+          mouseDrag={false}
+
           responsive={{
             0:{
               items:1,
-              nav:true
+              autoplay:false
           },
           500:{
             items:2,
-            nav:false
           },
           700:{
               items:3,
-              nav:false
           },
           1000:{
               items:4,
-              nav:false
           }
           }} 
         >

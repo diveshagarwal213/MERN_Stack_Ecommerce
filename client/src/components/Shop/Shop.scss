@@ -1,0 +1,35 @@
+#shop_products {
+    border: 1px solid red;
+    padding-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    overflow: hidden;
+
+    .product_card_div{
+        border: 1px solid green ;
+        width: 250px;    
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #shop_products{
+        flex-wrap: nowrap;
+        flex-direction: column;
+        
+        .product_card_div{
+            border: 1px solid green ;
+            width: auto; 
+        }
+
+        .productCard_img ~ div{
+            display: flex;
+            justify-content: space-between;
+            text-align: start;
+            padding: 0px 10px;
+        }
+    }
+    
+}

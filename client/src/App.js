@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { createContext, useReducer } from 'react';
 
@@ -22,7 +22,17 @@ const Error = () => {
 
 
 export const CartContext = createContext();
-const initialState = []
+
+//cart initialstate //local storage
+var initialState = [];
+var cartstate = localStorage.getItem('cartstate');
+cartstate =  JSON.parse(cartstate);
+if (cartstate) {
+  var state = cartstate.state; 
+  if (state) { 
+    initialState = state;
+  }
+}
 
 
 const App = () => {

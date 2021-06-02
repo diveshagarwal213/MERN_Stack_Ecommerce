@@ -2,6 +2,18 @@ import { useContext } from "react";
 import { CartContext } from '../../App'
 import {trashSvg} from '../../images/allSvg'
 
+const userData = {
+    name:'abc',
+    id:'exampleid',
+    address: {
+        city:'hanumangarh Town',
+        pincode:'335513',
+        state: 'rajasthan',
+        mobileno:'1234567890',
+        landmark:'op to BSNL OFFICE',
+        type:'home'
+    }
+}
 
 const CartProductCard = (props) => {
     const cartContext = useContext(CartContext);
@@ -37,24 +49,35 @@ const CartProducts = () => {
     const shippingprice = itemsPrice > 300 ? 0 : 30;
     const totalPrice = itemsPrice + shippingprice;
 
+    const confirmOrder = () => {
+        const order = {
+            ...userData,
+            items: products,
+            itemsprice: itemsPrice,
+            shippingprice: shippingprice,
+            totalprice: totalPrice,
+            payment:false
+        }
+        console.log(order);
+    }
+
     return (
         <div id='cart_products'>
-            {products.length === 0 && <div>Empty cart</div>}
+            {products.length === 0 && <div id='empty_cart'>Idiot add somthing first!!😤</div>}
             {products.map(product => (
                 <CartProductCard key={product.pid} product={product} />
             ))}
             {products.length !== 0 && (
-        <>
-          
-          <div>items price : ₹{ itemsPrice.toFixed(2)}</div>
-          {/* <div>tax price : ₹{ taxPrice.toFixed(2)}</div> */}
-          <div>shiping price : ₹{ shippingprice.toFixed(2)}</div>
-          <div>total : ₹{ totalPrice.toFixed(2)}</div>
-          <div>
-            <button>next</button>
-          </div>
-        </>
-      )}
+                <div id='price_details'>
+                    <p>items price : ₹{ itemsPrice.toFixed(2)}</p>
+                    {/* <div>tax price : ₹{ taxPrice.toFixed(2)}</div> */}
+                    {shippingprice === 0 ? ( <p> Free Delivery 😇  </p> ) : (<p>shiping price : ₹{ shippingprice.toFixed(2)}</p>)}                    
+                    <h3>total : ₹{ totalPrice.toFixed(2)}</h3>
+                    <div>
+                        <button onClick={confirmOrder} >Confirm Oder</button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 };
