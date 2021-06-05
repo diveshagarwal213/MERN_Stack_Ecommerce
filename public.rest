@@ -1,0 +1,2 @@
+//get all product in dec order
+GET http://localhost:5000/public/allproducts HTTP/1.1

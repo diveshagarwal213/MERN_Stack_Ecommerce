@@ -2,16 +2,21 @@ import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { createContext, useReducer } from 'react';
 
-//reducers
-import reducer from './reducers/CartTtemsReducer'
-
 //components
 import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
 import UserProfile from './components/UserProfile/UserProfile';
 import Shop from './components/Shop/Shop';
-import ProductDetails from './components/Product/ProductDetails'
+import ProductDetails from './components/Product/ProductDetails';
 import UserCart from './components/Cart/UserCart';
+
+//utils
+
+//reducers
+import reducer from './reducers/CartTtemsReducer'
+
+//contexts
+export const CartContext = createContext();
 
 //404 page
 const Error = () => {
@@ -20,8 +25,6 @@ const Error = () => {
   )
 }
 
-
-export const CartContext = createContext();
 
 //cart initialstate //local storage
 var initialState = [];
@@ -39,6 +42,7 @@ const App = () => {
 
   //global cart
   const [cartItems, dispatch] = useReducer(reducer, initialState);
+
   return(
     <>
       <Router>
