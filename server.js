@@ -15,10 +15,11 @@ app.use(express.json());
 app.use('/public', require('./routes/public.routes'));
 app.use('/admin', require('./routes/admin.routes'));
 
-//routes error handler
+//404 routes 
 app.use(async (req,res,next) => {
     next(creatErr.NotFound());//http-error
 });
+//error handler
 app.use((err,req,res,next) => {
     res.status(err.status || 500);
     res.send({

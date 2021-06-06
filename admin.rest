@@ -3,9 +3,9 @@ POST http://localhost:5000/admin/addproduct HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"choco 5",
+    "name":"abc 1",
     "price" :220,
     "image": "abc/abc",
-    "categories":["birthday", "cake"],
+    "categories":["cake", "birthday"],
     "about": "example about"
 }

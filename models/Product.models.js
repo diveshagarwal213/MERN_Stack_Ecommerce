@@ -22,6 +22,10 @@ const ProductSchema = new mongoose.Schema({
     image:{
         type:String,
         require: [true,"please provid a ProductImage"]
+    },
+    totalorders:{
+        type: Number,
+        default: 0
     }
 },
 {
