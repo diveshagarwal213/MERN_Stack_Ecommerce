@@ -1,37 +1,6 @@
 const Product = require('../models/Product.models');
-const creatErr = require('http-errors')
-
-//return all products ,  catagroites & limit are optional 
-const allProducts = async (req, res, next) => {
-    try {
-        let allProducts, limitno;
-        const { categories , limit } = req.query;
-        
-        if(limit) { limitno = Number(limit);};
-
-        if (categories){
-            if(limit){
-                allProducts = await Product.find({categories : categories}).sort({createdAt : -1 }).limit(limitno);
-            }else{
-                allProducts = await Product.find({categories : categories}).sort({createdAt : -1 });
-            }
-            
-        }else{
-            if(limit){
-                allProducts = await Product.find().sort({createdAt : -1 }).limit(limitno);
-            }else{
-                allProducts = await Product.find().sort({createdAt : -1 });
-            }
-        }
-
-        if(allProducts.length <= 0) throw creatErr.BadRequest("No Products found");
-        
-        res.send({products : allProducts});
-
-    } catch (error) {
-        next(error)
-    }
-};
+const creatErr = require('http-errors');
+const pagination = require('../utils/pagination');
 
 const mostPopular = async(req, res, next) => {
     try {
@@ -71,7 +40,6 @@ const productName = async(req, res, next) => {
 const productId = async (req, res, next) => {
     try{
         const { id } = req.params
-        console.log(id);
         const product = await Product.findOne({_id: id});
         
         if(!product) throw creatErr.BadRequest();
@@ -82,4 +50,59 @@ const productId = async (req, res, next) => {
     }
 };
 
-module.exports = {allProducts, mostPopular, productName, productId};
+//fetch New products based on =>  pagination-limit || pagination-category-limit ||  limit || categorie || categorie-limit
+
+const products = async (req, res, next) => {
+    let  limit = parseInt(req.query.limit);
+    let  page = parseInt(req.query.page);
+    const { categories  } = req.query;
+
+    let products, data;
+    
+    try {
+
+        if (page) {
+            if(!limit) limit = 3 ;//default limit in pagination
+            
+            if(categories){
+                products = await Product.find({categories : categories}).sort({createdAt : -1 });
+            }else{
+                products = await Product.find().sort({createdAt : -1 });
+            }
+            
+            if(products.length <= 0) throw creatErr.BadRequest("No Products found");
+            
+            data = pagination(products, page, limit);
+        
+        } else if(limit) {
+
+            if(categories){
+                products = await Product.find({categories : categories}).sort({createdAt : -1 }).limit(limit);
+            }else{
+                products = await Product.find().sort({createdAt : -1 }).limit(limit);
+            }
+            
+            if(products.length <= 0) throw creatErr.BadRequest("No Products found");
+            
+            data = {products};
+
+        }else{
+            if(categories){
+                products = await Product.find({categories : categories}).sort({createdAt : -1 });
+            }else{
+                products = await Product.find().sort({createdAt : -1 });
+            }
+            
+            if(products.length <= 0) throw creatErr.BadRequest("No Products found");
+            
+            data = {products};
+        }
+        
+        res.send(data);
+
+    } catch (error) {
+        next(error)
+    }
+};
+
+module.exports = {products,  mostPopular, productName, productId};
