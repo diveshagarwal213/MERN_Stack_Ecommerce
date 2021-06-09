@@ -4,6 +4,7 @@ import { createContext, useReducer } from 'react';
 
 //components
 import Nav from './components/Nav/Nav';
+import Admin from './components/Admin/Admin';
 import Home from './components/Home/Home';
 import UserProfile from './components/UserProfile/UserProfile';
 import Shop from './components/Shop/Shop';
@@ -55,6 +56,7 @@ const App = () => {
                 <Route exact path="/userprofile" component={UserProfile} />
                 <Route exact path="/usercart" component={UserCart} />
                 <Route path="/product/:pid" component={ProductDetails} />
+                <Route path="/admin1" component={ Admin } />
                 <Route  component={Error} />
             </Switch>
           </div>

@@ -1,6 +1,8 @@
 const express = require('express');
 const creatErr = require('http-errors');
 require('dotenv').config();
+const cors = require('cors');
+
 //PORT
 const PORT = process.env.PORT || 5000 ;
 
@@ -10,6 +12,11 @@ require('./config/db');
 //express
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}))
 
 //routes
 app.use('/public', require('./routes/public.routes'));

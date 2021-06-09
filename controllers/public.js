@@ -1,6 +1,7 @@
 const Product = require('../models/Product.models');
 const creatErr = require('http-errors');
 const pagination = require('../utils/pagination');
+const path = require('path')
 
 const mostPopular = async(req, res, next) => {
     try {
@@ -51,7 +52,6 @@ const productId = async (req, res, next) => {
 };
 
 //fetch New products based on =>  pagination-limit || pagination-category-limit ||  limit || categorie || categorie-limit
-
 const products = async (req, res, next) => {
     let  limit = parseInt(req.query.limit);
     let  page = parseInt(req.query.page);
@@ -105,4 +105,15 @@ const products = async (req, res, next) => {
     }
 };
 
-module.exports = {products,  mostPopular, productName, productId};
+// image request
+const images =  (req, res, next) => {
+    try{
+        const {filename} = req.params;
+        let reqPath = path.join(__dirname, '../');
+        res.sendFile(`images/${filename}`, { root: reqPath });
+    }catch(error){
+        next(error)
+    }
+};
+
+module.exports = {products,  mostPopular, productName, productId, images};

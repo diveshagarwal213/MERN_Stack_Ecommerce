@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const { addProduct } = require('../controllers/admin')
+//middleware
+const {fileUpload} = require('../middleware/fileUplod');
 
+//controllers
+const { addProduct , testaddProducts } = require('../controllers/admin')
 
-router.route('/addproduct').post(addProduct);
+//routes
+router.route('/addproduct').post(fileUpload.single('images'), addProduct );
 
 module.exports = router;
