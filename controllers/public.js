@@ -110,7 +110,7 @@ const images =  (req, res, next) => {
     try{
         const {filename} = req.params;
         let reqPath = path.join(__dirname, '../');
-        res.sendFile(`images/${filename}`, { root: reqPath });
+        res.sendFile(`images/product/${filename}`, { root: reqPath });
     }catch(error){
         next(error)
     }

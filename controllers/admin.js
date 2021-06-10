@@ -43,7 +43,7 @@ const addProduct = async (req, res, next) => {
         if(error.isJoi === true) error.status = 422;
 
         if(req.file){
-            let path = `./images/${req.file.filename}`
+            let path = `./images/product/${req.file.filename}`
             fs.unlink(path, (err) => {
                 if (err) {
                   console.error(err)

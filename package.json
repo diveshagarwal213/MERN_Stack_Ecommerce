@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client":"cd client && npm start",
+    "dev": "concurrently -n 'server,client' -c 'white,blue' \"nodemon server.js\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

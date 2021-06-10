@@ -49,10 +49,33 @@ body {
     background: var(--icons-color);
 }
 
+datalist{
+    display: none;
+}
+
+textarea {
+    resize: none;
+    outline: none;
+}
+
 button{
     outline: none;
     border: none;
     cursor: pointer;
+}
+
+/* [list]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+input:invalid::-webkit-calendar-picker-indicator {
+    display: none;
+} */
+
+input{
+    outline: none;
 }
 
 #main {

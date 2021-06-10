@@ -11,4 +11,4 @@ GET http://localhost:5000/public/productid/60bc7f9a1c55a0375ccd4bea  HTTP/1.1
 GET http://localhost:5000/public/products?page=1 HTTP/1.1
 
 ### images
-GET http://localhost:5000/public/images/f.png HTTP/1.1
+GET http://localhost:5000/public/images/ HTTP/1.1
