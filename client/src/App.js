@@ -1,6 +1,8 @@
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { createContext, useReducer } from 'react';
+import { toast } from "react-toastify";
 
 //components
 import Nav from './components/Nav/Nav';
@@ -18,6 +20,9 @@ import reducer from './reducers/CartTtemsReducer'
 
 //contexts
 export const CartContext = createContext();
+
+//configures
+toast.configure()
 
 //404 page
 const Error = () => {

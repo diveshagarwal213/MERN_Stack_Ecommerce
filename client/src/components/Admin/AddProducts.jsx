@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import placeholder from '../../images/placeholder.png'
+import { toast } from "react-toastify";
 
 const AddProducts = () => {
     
@@ -41,20 +42,28 @@ const AddProducts = () => {
         Data.append('price', productData.price);
         Data.append('categories', productData.categories);
         Data.append('about', productData.about);
-        
         //console.log(Array.from(Data));
-        //send Formdata
-       try {
         
+       try {
         const result = await axios.post("http://localhost:5000/admin/addproduct", Data);
-        console.log("file sent");
-        console.log(result.data);
+        //console.log(result.data);
+        toast.success("Product Saved!")
+
+        //reset form
+        setImg(placeholder);
+        setFileData(null);
+        setProductData({
+            name: "",
+            price: "",
+            about: "",
+            categories: ""
+        })
 
        } catch (error) {
            if (error.response) {
-                console.log(error.response.data.error.message);
+                toast.error(error.response.data.error.message)
            }else{
-               console.log(error.message);
+               toast.error(error.message)
            }
        }
     }
@@ -63,10 +72,10 @@ const AddProducts = () => {
         <div id='add_products_div' >
             <div id='add_products'>
                 <div id='addP_form' >
-                <h1>Add Products</h1>
+                <h1>Add Product</h1>
                     <form onSubmit={onSubmitHandler} autoComplete='off' >
                         <input type="text" onChange={inputHandler} placeholder='name' value={productData.name} name='name' />
-                        <input type="number" min={1} onChange={inputHandler} placeholder='price' value={productData.price} name='price' />
+                        <input type="number" onChange={inputHandler} placeholder='price' value={productData.price} name='price' />
                         <input list="categories" type="text" onChange={inputHandler} placeholder='categories' value={productData.categories} name='categories' />
                         <textarea  onChange={inputHandler} placeholder='about' value={productData.about} name='about' />
                         <label htmlFor="fileData"> Browser image </label>

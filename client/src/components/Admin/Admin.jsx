@@ -6,6 +6,7 @@ const Admin =  () => {
         <div id='admin'>
             <h1>this is admin</h1>
             <AddProducts/>
+            <div id="empty"></div>
         </div>
     )
 };
