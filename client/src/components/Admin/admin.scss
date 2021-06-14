@@ -1,3 +1,27 @@
+/*----admin_nav----*/
+#admin_nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--bg-primary);
+    width: 100%;
+    button{
+        padding: 12px 15px;
+        background: transparent;
+        font-size: large;
+        color: white;
+        border-bottom: 3px solid transparent;
+
+        &:hover{
+            border-bottom: 3px solid var(--icons-color);
+        }
+    }
+
+    .active{
+        border-bottom: 3px solid var(--icons-color);
+    }
+}
+/*----Add Products----*/
 #add_products_div {
 
     h1{
@@ -89,7 +113,85 @@
     border-radius: 10px;
 }
 
+/*----update products----*/
+
+#select_update{
+    padding: 1%;
+
+    input{
+        padding: 10px 20px;
+        margin: 10px 10px 20px 0px  ;
+        font-size: medium;
+        border: none;
+        border-bottom: 3px solid lightgrey;
+        &:focus{
+            border-bottom: 3px solid var(--icons-color);
+        }
+    }
+    button{
+        padding: 12px 20px;
+        box-shadow: var(--box-shadow);
+        background: transparent;
+        text-transform: capitalize;
+        border-radius: 10px;
+        &:hover{
+            box-shadow: var(--hover-box-shadow);
+            background-color: var(--icons-color);
+            color: white;
+        }
+    }
+}
+
+.u_products{
+    display: flex;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 10px 0px 10px 0px ;
+    
+    &:hover{
+        box-shadow: var(--hover-box-shadow);
+    }
+
+    button{
+        font-size: medium;
+        font-weight: 500;
+        &:hover{ 
+            background-color: green !important;
+        }
+    }
+    p{
+        font-size: large;
+        font-weight: 500;
+        text-transform: capitalize;
+        
+    }
+}
+
+.u_products_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 79%;
+
+    p ~ p {
+        color: var(--icons-color);
+    }
+}
+
+.u_products_img{
+    background-position: center;
+    background-size: cover;
+    width: 20%;
+    min-height: 100px;
+    min-width: 150px;
+}
+
 @media only screen and (max-width: 600px){
+    #admin_nav{
+        flex-wrap: wrap;
+    }
+
     #add_products{
         flex-direction: column-reverse;
 
@@ -98,4 +200,17 @@
         }
 
     }
+
+    .u_products{
+        flex-direction: column;
+
+        .u_products_content {
+            width: 100%;
+
+        }
+        .u_products_img{
+            width: 100%;
+            height: 200px;
+        }
+    }    
 }

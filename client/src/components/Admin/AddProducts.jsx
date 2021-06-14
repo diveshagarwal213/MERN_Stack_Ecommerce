@@ -79,7 +79,7 @@ const AddProducts = () => {
                         <input list="categories" type="text" onChange={inputHandler} placeholder='categories' value={productData.categories} name='categories' />
                         <textarea  onChange={inputHandler} placeholder='about' value={productData.about} name='about' />
                         <label htmlFor="fileData"> Browser image </label>
-                        <input type="file" id="fileData" accept=".png, .jpg, .jpeg" onChange={fileChangeHandler} />
+                        <input type="file" id="fileData" onChange={fileChangeHandler} />
                         <button type='submit' >submit</button>
 
                         <datalist id="categories">

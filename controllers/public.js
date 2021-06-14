@@ -1,7 +1,8 @@
 const Product = require('../models/Product.models');
 const creatErr = require('http-errors');
 const pagination = require('../utils/pagination');
-const path = require('path')
+const path = require('path');
+const { parse } = require('dotenv');
 
 const mostPopular = async(req, res, next) => {
     try {
@@ -26,9 +27,26 @@ const mostPopular = async(req, res, next) => {
 
 const productName = async(req, res, next) => {
     try {
-        const {name} = req.params
+        let products;
         
-        const products = await Product.find({name : {$regex: name, $options: 'i'}});
+        const {name} = req.params
+        let keys = name.split(" ");
+
+        const {mostpopular, categories} = req.query
+
+        if (categories === "true") {
+            if(mostpopular === "true"){
+                products = await Product.find({categories: {$all : keys}}).sort({totalorders : -1 });
+            }else{
+                products = await Product.find({categories: {$all : keys}});
+            }
+        }else{
+            if(mostpopular === "true"){
+                products = await Product.find({$or : [{name : {$regex: name, $options: 'i'}}, {categories: {$all : keys}}]}).sort({totalorders : -1 });
+            }else{
+                products = await Product.find({$or : [{name : {$regex: name, $options: 'i'}}, {categories: {$all : keys}}]});
+            }
+        }
         
         if(products.length <= 0) throw creatErr.BadRequest("No products found")
         

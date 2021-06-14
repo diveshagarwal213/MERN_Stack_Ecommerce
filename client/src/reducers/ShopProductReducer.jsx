@@ -17,7 +17,17 @@ const shopProductReducer = (state, action) => {
         }
         //console.log(state);
         return state
-    }else{
+    }else if(type === 'ADD_ON'){
+        let arr = state.productdata;
+        let arr2 = [...arr, ...action.data ]
+        state = {
+            loading: false,
+            productdata: arr2,
+            error: ''
+        }
+        //console.log(state);
+        return state;
+    } else{
         return state
     }
 }
