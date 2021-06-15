@@ -1,6 +1,6 @@
 import  "./admin.scss";
 import AddProducts from "./AddProducts";
-import UpdateProducts from "./UpdateProducts";
+import UpdateProducts from "./UpdateProducts/UpdateProducts";
 import { useState } from "react";
 
 const Admin =  () => {

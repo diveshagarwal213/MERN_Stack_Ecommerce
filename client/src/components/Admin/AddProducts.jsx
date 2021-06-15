@@ -72,7 +72,7 @@ const AddProducts = () => {
         <div id='add_products_div' >
             <div id='add_products'>
                 <div id='addP_form' >
-                <h1>Add Product</h1>
+                    <h1>Add Product</h1>
                     <form onSubmit={onSubmitHandler} autoComplete='off' >
                         <input type="text" onChange={inputHandler} placeholder='name' value={productData.name} name='name' />
                         <input type="number" onChange={inputHandler} placeholder='price' value={productData.price} name='price' />
