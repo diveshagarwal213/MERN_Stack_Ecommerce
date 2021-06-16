@@ -8,8 +8,7 @@ import { toast } from "react-toastify";
 
 
 const UpdateProducts = () => {
-    
-    //const [search, setSearch] = useState(""); 
+     
     const [singleProduct, setsingleProduct] = useState({
         name: "",
         price: "",
@@ -18,7 +17,7 @@ const UpdateProducts = () => {
     });
     const [fileData, setFileData] = useState(); 
     const [ src, setImg] = useState(placeholder);
-
+    const [deletecfm , setdeletecfm] = useState(false);
 
     //set selected data for update
     const setIdforUpdate = async (id) => {
@@ -49,7 +48,6 @@ const UpdateProducts = () => {
 
     const resetform = () => {
         //reset form
-        console.log(singleProduct);
         setImg(placeholder);
         setFileData(null);
         setsingleProduct({
@@ -81,9 +79,7 @@ const UpdateProducts = () => {
             const result = await axios.post("http://localhost:5000/admin/updateproduct", Data);
             //console.log(result);
             toast.success("Product Updated!")
-
             resetform();
-
         } catch (error) {
             if (error.response) {
                 toast.error(error.response.data.error.message)
@@ -91,6 +87,21 @@ const UpdateProducts = () => {
                toast.error(error.message)
            }
         }
+    }
+
+    const deleteHandler = async() => {
+       try {
+        const deleteProduct = await axios.get(`http://localhost:5000/admin/deleteproduct/${singleProduct._id}`);
+        console.log(deleteProduct);
+        toast.success("Product Deleted")
+        resetform();
+       } catch (error) {
+        if (error.response) {
+            toast.error(error.response.data.error.message)
+        }else {
+            toast.error(error.message);
+        }
+       }
     }
 
     return (
@@ -110,9 +121,17 @@ const UpdateProducts = () => {
                         <input type="file" id="fileData" onChange={fileChangeHandler} />
                         <button type='submit' >submit</button>
                     </form>
-                    <button id="cancel_btn" onClick={() => resetform()} >Cancel</button>
-                </div>
-                ) : (<h4>Please select a Product for Update</h4>)}
+                    <div id="update_options" >
+                        <button id="cancel_btn" onClick={() => resetform()} >Cancel</button>
+                        {deletecfm === true ? (
+                            <>
+                            <button className="delete_btn" onClick={() => deleteHandler()} >confirm</button>
+                            <button id="cancel_btn" onClick={() => setdeletecfm(false)} >cancel it</button>
+                            </>
+                        ) : (<button className="delete_btn" onClick={() => setdeletecfm(true)} >Delete</button>) }
+                    </div>
+                    </div>
+                ) : (<h4>Please select a Product for Update!</h4>)}
 
                 <div id='addP_img' style={{ backgroundImage: `url("${src}")` }} ></div>
             </div>

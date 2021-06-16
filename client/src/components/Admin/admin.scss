@@ -41,7 +41,7 @@
     box-shadow: var(--box-shadow);
     border-radius: 20px;
     div {
-        width: 40%;
+        width: 48%;
     }
 }
 
@@ -210,6 +210,30 @@
     width: 20%;
     min-height: 100px;
     min-width: 150px;
+}
+
+#update_options{
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+
+    button{
+        padding: 8px 15px;
+        width: fit-content;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+        background: transparent;
+        &:hover{
+            box-shadow: var(--hover-box-shadow);
+        }
+    }
+
+    .delete_btn{
+        &:hover{
+            background-color: red;
+            color: white;
+        }
+    }
 }
 
 @media only screen and (max-width: 600px){

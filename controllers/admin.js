@@ -56,7 +56,6 @@ const addProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res ,next) => {
     
-    console.log(req.body);
     const {name, price, about, categories, id, oldimgname} = req.body; // [object:null prototype ] {name: "" ,...}
     try {
 
@@ -105,10 +104,32 @@ const updateProduct = async (req, res ,next) => {
                 //file removed if saved
             });
         }
-
         next(error);
     }
-
 };
 
-module.exports = { addProduct, updateProduct };
+const deleteProduct = async (req,res,next) => {
+    const {id} = req.params
+    try {
+        if(id.match(/^[0-9a-fA-F]{24}$/)){
+            const findProduct = await Product.findOne({_id : id});
+            if(!findProduct) throw createErr.NotFound();
+            const deleteProduct = await Product.deleteOne({_id : id});
+            if(deleteProduct){
+                let path = `./images/product/${findProduct.image}`
+                fs.unlink(path, (err) => {
+                    if (err) {
+                    console.error(err)
+                    }
+                });
+            }
+            res.send("Product Deleted");
+        }else{
+            throw  createErr.BadRequest("Not a object id");
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { addProduct, updateProduct, deleteProduct };
