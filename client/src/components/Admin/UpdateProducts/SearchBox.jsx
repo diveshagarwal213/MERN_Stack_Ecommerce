@@ -35,6 +35,7 @@ const SearchBox = (props) => {
         <div id="select_update">
             <input type="text" placeholder="search" />
             <button>Search</button>
+            <button onClick={() => fetchNewRecords()} >Refresh</button>
             {newProducts.map(x => (
                 <UProducts key={x._id} name={x.name} price={x.price} image={x.image} id={x._id} funsetid={props.funsetid} />
             ))}

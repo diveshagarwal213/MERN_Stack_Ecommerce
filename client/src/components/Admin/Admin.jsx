@@ -18,7 +18,7 @@ const Admin =  () => {
                 <button className="btn" onClick={() => {adminNavHandler("ADMIN_PROFILE")}} >Profile</button>
             </div>
 
-            <h1>Admin</h1>
+            
             {adminNav === "ORDERS" ? ("this is orders") : ("")}
             {adminNav === "ADD_PRODUCTS" ? (<AddProducts/>) : ("")}
             {adminNav === "UPDATE_PRODUCTS" ? (<UpdateProducts/>) : ("")}

@@ -115,6 +115,26 @@
 
 /*----update products----*/
 
+#update_productsDiv{
+
+    h1{
+        line-height: 1;
+        text-transform: capitalize;
+        font-size: x-large;
+    }
+
+    #cancel_btn{
+        padding: 8px 15px;
+        width: fit-content;
+        border-radius: 10px;
+
+        &:hover{
+            
+            background-color: rgb(255, 255, 125);
+        }
+    }
+}
+
 #select_update{
     padding: 1%;
 
@@ -139,6 +159,11 @@
             background-color: var(--icons-color);
             color: white;
         }
+    }
+
+    button~button{
+        
+        margin-left: 1%;
     }
 }
 
