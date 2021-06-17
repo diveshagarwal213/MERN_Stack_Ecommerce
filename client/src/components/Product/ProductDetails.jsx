@@ -1,30 +1,32 @@
-
-
-const data = {
-    pid: 0,
-    name: "example ",
-    image: "https://source.unsplash.com/NyQwVPacW00",
-    price: "200",
-    about: "Lorem ipsum dolor sit amet, consectetuer adipisc in elit, sed diam non ummy nibh in euismod tincidunt ut liber tempor laoreet. Nullam viverra orci id lectus aliquam luctus. Aliquam elementum gravida lacus non accumsan. Nullam ultrices purus ac porta tincidunt. Nullam vel scelerisque dui, posuere pulvinar arcu.",
-    categories:["Celebration", "Chocolate", "Cupcake", "Desserts"]
-}
-
+import { useEffect, useState } from 'react';
+import FetchSingleProduct from '../../utils/FetchSingleProduct';
+import LoadingComponent from '../../utils/LoadingComponent'
+import { useContext } from 'react';
+import {CartContext} from '../../App'
 
 const ProductD = (props) => {
-    const cat = props.categories
-    const categories = cat.join(" ");
+    const {categories, _id, about, name, image, price, createdAt} = props.data
+    
+    let newdata = props.data;
+    newdata = {...newdata, pid: _id};
+
+    //!loading state,   categories.join(" "); gives an error 
+    let cat = categories.join(" ");  
+    let date = new Date(createdAt);
+
+    const cartContext = useContext(CartContext);
 
     return (
         <div id='product_D'>
-            <div id="productD_imgDiv" style={{backgroundImage: `url("${props.img}")`}} >
+            <div id="productD_imgDiv" style={{backgroundImage: `url("http://localhost:5000/public/images/${image}")`}} >
             </div>
             <div id='productD_aboutDiv'>
-                <h1>{props.name}</h1>
-                <h3>₹ {props.price}</h3>
-                <p> {props.about} </p>
-                <button  >Add to Cart</button>
-                <p>ID: {props.id}</p>
-                <p>Categories : {categories}</p>
+                <h1>{name}</h1>
+                <h3>₹ {price}</h3>
+                <p> Details - <br /> {about} </p>
+                <button onClick={() => cartContext.cartDispatch({ type: 'onAdd', product: newdata})} >Add to Cart</button>
+                <p>Categories : {cat}</p>
+                <p>Created on : {date.toDateString()}</p>
 
             </div>
         </div>
@@ -33,13 +35,26 @@ const ProductD = (props) => {
 
 const ProductDetails = ({ match }) => {
 
+    const [productData, setProductData] = useState({});
+    const [loading, setloading] = useState(true);
+
     const pId = match.params.pid;
+
+    const fetchproduct = async () => {
+        const result = await FetchSingleProduct(pId);
+        if(result) {
+            setProductData(result);
+            setloading(false);
+        }
+    };
+    
+    useEffect(()=>{
+        fetchproduct();
+    },[])
 
     return (
         <div id="product_details" >
-            <ProductD id={pId} img={data.image} name={data.name} price={data.price}  about={data.about}
-                categories={data.categories}
-            />
+            {loading === true ? (<LoadingComponent/>) : (<ProductD data={productData}/>)}
             <div id="empty" ></div>
         </div>
 
