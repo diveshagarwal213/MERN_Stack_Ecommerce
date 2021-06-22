@@ -2,7 +2,6 @@ const Product = require('../models/Product.models');
 const creatErr = require('http-errors');
 const pagination = require('../utils/pagination');
 const path = require('path');
-const { parse } = require('dotenv');
 
 const mostPopular = async(req, res, next) => {
     try {

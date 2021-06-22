@@ -23,7 +23,7 @@ const ProductD = (props) => {
             <div id='productD_aboutDiv'>
                 <h1>{name}</h1>
                 <h3>₹ {price}</h3>
-                <p> Details - <br /> {about} </p>
+                <p> {about} </p>
                 <button onClick={() => cartContext.cartDispatch({ type: 'onAdd', product: newdata})} >Add to Cart</button>
                 <p>Categories : {cat}</p>
                 <p>Created on : {date.toDateString()}</p>

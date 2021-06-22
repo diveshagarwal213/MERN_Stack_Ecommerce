@@ -1,6 +1,6 @@
 const setlocalstorage =  (state) => {
     localStorage.setItem('cartstate', JSON.stringify({state}));
-    console.log({state});
+    //console.log({state});
 };
 
 const reducer = (state, action) => {

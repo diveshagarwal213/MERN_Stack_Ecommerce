@@ -121,3 +121,43 @@
 #home_product_Caro {
     padding: 1% 5%;
 }
+
+/*------------class-open--------------*/
+
+#class_open{
+    border: 1px solid red;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+    div{
+        width: 48%;
+        border: 2px solid green;
+    }
+}
+#class_openSvg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 10px;
+    svg{
+        width: 100%;
+        height: 100%;
+    }
+}
+#class_openContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 1;
+    h2{
+        font-family: 'Pacifico';
+        color: var(--icons-color);
+    }
+    p{
+        font-size: 13px;
+        line-height: .5;
+    }
+}

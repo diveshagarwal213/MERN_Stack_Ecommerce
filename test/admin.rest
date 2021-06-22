@@ -9,3 +9,6 @@ Content-Type: application/json
     "categories":["cake", "birthday"],
     "about": ""
 }
+
+###
+GET http://localhost:5000/admin/deleteproduct/60c998e82f938e20b446082a HTTP/1.1
