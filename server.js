@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
@@ -29,6 +29,7 @@ app.use(async (req,res,next) => {
 });
 //error handler
 app.use((err,req,res,next) => {
+    
     res.status(err.status || 500);
     res.send({
         error:{

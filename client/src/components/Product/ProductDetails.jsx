@@ -18,7 +18,7 @@ const ProductD = (props) => {
 
     return (
         <div id='product_D'>
-            <div id="productD_imgDiv" style={{backgroundImage: `url("http://localhost:5000/public/images/${image}")`}} >
+            <div id="productD_imgDiv" style={{backgroundImage: `url("http://${window.location.hostname}:5000/public/images/${image}")`}} >
             </div>
             <div id='productD_aboutDiv'>
                 <h1>{name}</h1>

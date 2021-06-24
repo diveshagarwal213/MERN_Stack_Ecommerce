@@ -8,7 +8,7 @@ const UProducts = (props) => {
 
     return (
         <div className="u_products">
-            <div className="u_products_img" style={{ backgroundImage: `url("http://localhost:5000/public/images/${image}")` }} ></div>
+            <div className="u_products_img" style={{ backgroundImage: `url("http://${window.location.hostname}:5000/public/images/${image}")` }} ></div>
             <div className="u_products_content">
                 <p>{name}</p>
                 <p>₹{price}</p>

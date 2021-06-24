@@ -1,4 +1,5 @@
 const multer = require('multer');
+const createErr = require('http-errors')
 
 const fileStorageEng = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -9,6 +10,19 @@ const fileStorageEng = multer.diskStorage({
     }
 });
 
-const fileUpload = multer({storage : fileStorageEng});
+const fileLimit = {
+    fileSize: 2000000
+}
+
+const fileUpload = multer({
+    storage : fileStorageEng,
+    limits: fileLimit,
+    fileFilter(req,file,cb){
+        if(!file.originalname.match(/\.(png|jpg|jpeg|webp)$/)){
+            return cb(new createErr.BadRequest("please provide a valid file") );
+        }
+        cb(null, true);
+    }
+});
 
 module.exports = {fileUpload};

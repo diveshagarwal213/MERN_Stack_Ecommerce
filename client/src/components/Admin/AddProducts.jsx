@@ -15,8 +15,10 @@ const AddProducts = () => {
     });
 
     const fileChangeHandler = (e) => {
-        setFileData(e.target.files[0]);
-        if(e.target.files[0]) setImg(URL.createObjectURL(e.target.files[0])); //preview image, if imp 
+        if(e.target.files[0]){ //remember => app will crash 'if' not present!
+            setFileData(e.target.files[0]); 
+            setImg(URL.createObjectURL(e.target.files[0]));   
+        }  
     }
 
     const inputHandler = (e) => {
@@ -45,7 +47,7 @@ const AddProducts = () => {
         //console.log(Array.from(Data));
         
        try {
-        const result = await axios.post("http://localhost:5000/admin/addproduct", Data);
+        const result = await axios.post(`http://${window.location.hostname}:5000/admin/addproduct`, Data);
         //console.log(result.data);
         toast.success("Product Saved!")
 

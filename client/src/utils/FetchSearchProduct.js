@@ -4,7 +4,7 @@ import axios from "axios";
 const SearchProduct = async (keyword,mostpopular = false, categories = false) => {
     try {
         
-        const result = await axios.get(`http://localhost:5000/public/productname/${keyword}?categories=${categories}&mostpopular=${mostpopular}`);
+        const result = await axios.get(`http://${window.location.hostname}:5000/public/productname/${keyword}?categories=${categories}&mostpopular=${mostpopular}`);
         return result; //array of products
 
     } catch (error) {

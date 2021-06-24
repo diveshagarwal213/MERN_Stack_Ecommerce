@@ -21,7 +21,7 @@ const CartProductCard = (props) => {
     //console.log(product);
     return (
         <div className='cartP_card'>
-            <div className='cartP_card_img' style={{ backgroundImage: `url('http://localhost:5000/public/images/${product.image}')` }} ></div>
+            <div className='cartP_card_img' style={{ backgroundImage: `url('http://${window.location.hostname}:5000/public/images/${product.image}')` }} ></div>
             <div className='cartP_card_content'>
                 <h2>
                     {product.name}

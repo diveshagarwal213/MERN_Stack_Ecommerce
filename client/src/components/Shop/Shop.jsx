@@ -39,7 +39,7 @@ const Shop = () => {
 
     const fetchdata = async (pageno = 1) => {
          try {
-            const result = await axios.get(`http://localhost:5000/public/products?page=${pageno}`);
+            const result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${pageno}`);
             const products = result.data.products
             const shopProducts = products.map(row => {return { pid : row._id ,...row}});
             //console.log(shopProducts);

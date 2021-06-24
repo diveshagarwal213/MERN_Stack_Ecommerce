@@ -26,7 +26,7 @@ const UpdateProducts = () => {
             let s = data.categories.join(" ");
             data = {...data, categories: s}
             setsingleProduct(data);
-            setImg(`http://localhost:5000/public/images/${data.image}`);
+            setImg(`http://${window.location.hostname}:5000/public/images/${data.image}`);
         }
     }
 
@@ -76,7 +76,7 @@ const UpdateProducts = () => {
         //console.log(Array.from(Data));
 
         try {
-            const result = await axios.post("http://localhost:5000/admin/updateproduct", Data);
+            const result = await axios.post(`http://${window.location.hostname}:5000/admin/updateproduct`, Data);
             //console.log(result);
             toast.success("Product Updated!")
             resetform();
@@ -91,7 +91,7 @@ const UpdateProducts = () => {
 
     const deleteHandler = async() => {
        try {
-        const deleteProduct = await axios.get(`http://localhost:5000/admin/deleteproduct/${singleProduct._id}`);
+        const deleteProduct = await axios.get(`http://${window.location.hostname}:5000/admin/deleteproduct/${singleProduct._id}`);
         console.log(deleteProduct);
         toast.success("Product Deleted")
         resetform();

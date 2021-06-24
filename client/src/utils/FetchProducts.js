@@ -7,21 +7,21 @@ const FetchProducts = async (categories = null, limit = null , page = null) => {
         let result;
         if (page) {
             if(categories){
-                result = await axios.get(`http://localhost:5000/public/products?page=${page}&categories=${categories}`)
+                result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${page}&categories=${categories}`)
             }else{
-                result = await axios.get(`http://localhost:5000/public/products?page=${page}`); 
+                result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${page}`); 
             }
         } else if(limit){
             if(categories){
-                result = await axios.get(`http://localhost:5000/public/products?limit=${limit}&categories=${categories}`)
+                result = await axios.get(`http://${window.location.hostname}:5000/public/products?limit=${limit}&categories=${categories}`)
             }else{
-                result = await axios.get(`http://localhost:5000/public/products?limit=${limit}`); 
+                result = await axios.get(`http://${window.location.hostname}:5000/public/products?limit=${limit}`); 
             }
         }else{
             if(categories){
-                result = await axios.get(`http://localhost:5000/public/products?categories=${categories}`)
+                result = await axios.get(`http://${window.location.hostname}:5000/public/products?categories=${categories}`)
             }else{
-                result = await axios.get(`http://localhost:5000/public/products`); 
+                result = await axios.get(`http://${window.location.hostname}:5000/public/products`); 
             }
         }
         

@@ -5,6 +5,7 @@
 
 /*--------*/
 #cart_products {
+    //border: 1px solid red;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -12,6 +13,7 @@
 }
 
 .cartP_card {
+    //border: 1px solid red;
     border-radius: 10px;
     width: 80%;
     overflow: hidden;
@@ -148,12 +150,21 @@
             min-height: 120px;
         }
     }
+    .cartP_card_img {
+        height: 200px;
+    }
 
     .cartP_card_content {
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
         padding: 10px 5px;
+
+        h2{
+            p{
+                margin: 8px 0px;
+            }
+        }
 
         h3{
             position: absolute;
