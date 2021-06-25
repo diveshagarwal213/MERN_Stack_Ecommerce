@@ -12,3 +12,6 @@ GET http://localhost:5000/public/products?page=1&categories=cake&limit=1 HTTP/1.
 
 ### images
 GET http://localhost:5000/public/images/ HTTP/1.1
+
+### /alldistinctcategories
+GET http://localhost:5000/public/alldistinctcategories HTTP/1.1

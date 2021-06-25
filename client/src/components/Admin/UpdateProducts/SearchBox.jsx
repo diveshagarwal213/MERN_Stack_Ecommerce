@@ -34,7 +34,7 @@ const SearchBox = (props) => {
             const result = await SearchProduct(searchkey, mostpopular, categories);
             if(result) setnewProducts(result.data.products);
         }else{
-            toast.error("Type at leat 3 character");
+            toast.warning("Type at least 3 character");
         }
     }
 

@@ -133,4 +133,13 @@ const images =  (req, res, next) => {
     }
 };
 
-module.exports = {products,  mostPopular, productName, productId, images};
+const allDistinctCategories = async (req, res, next) => {
+    try {
+        const categories = await Product.distinct("categories");
+        res.send({categories});
+    } catch (error) {
+        next(error)
+    }
+}; 
+
+module.exports = {products,  mostPopular, productName, productId, images, allDistinctCategories};

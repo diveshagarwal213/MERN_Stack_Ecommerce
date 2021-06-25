@@ -1,4 +1,5 @@
-import './Nav.css'
+//import './Nav.css'
+import './nav.scss'
 import { navSvg , homeSvg, shopSvg, userProfileSvg, basketSvg } from './NavSvgs'
 import { Link ,NavLink } from 'react-router-dom';
 import NavItem from './NavItem'

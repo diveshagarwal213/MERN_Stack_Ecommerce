@@ -55,7 +55,6 @@ const ProductDetails = ({ match }) => {
     return (
         <div id="product_details" >
             {loading === true ? (<LoadingComponent/>) : (<ProductD data={productData}/>)}
-            <div id="empty" ></div>
         </div>
 
     )

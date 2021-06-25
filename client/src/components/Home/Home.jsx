@@ -81,7 +81,6 @@ const  Home = () => {
       <CenterHeading heading="new products" />
       {newproducts.length > 0 ? (<HomeProductCaro data={newproducts}/>) : (<LoadingComponent/>) }
       
-      <div id="empty"></div>
     </div>
   );
 }

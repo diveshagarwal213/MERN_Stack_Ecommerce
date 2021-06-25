@@ -1,78 +1,92 @@
 import { useEffect, useReducer, useState } from 'react';
 import './Shop.scss';
 import ShopProducts from './ShopProducts';
-import { toast } from "react-toastify";
-import axios from "axios";
 import shopProductReducer from "../../reducers/ShopProductReducer";
+import LoadingComponent from '../../utils/LoadingComponent';
+import FetchProducts from '../../utils/FetchProducts';
+import ShopSideBar from './ShopSideBar';
 
 // custom hooks
 import useDocTitle from "../../hooks/useDocTitle";
 
-
-const SearchProduct =  () => {
-    const [search , setsearch] = useState('');
-
-    const searchHandler = () => {
-        console.log(search);
-    }
-
-    return(
-        <div id='search_product'>
-            <input type="text" value={search} name='keyword' placeholder='Enter Name or Id' onChange={(e) => setsearch(e.target.value)} />
-            <button onClick={ searchHandler }>search</button>
-            <br />
-        </div>
-    )
-};
-
 const initialState = {
     loading: true,
     error:'',
-    productdata:[]
+    productdata:[],
+    hasNext:true
 }
 
 const Shop = () => {
 
     useDocTitle('Shop |');
 
-    const [poductDataState , productDataDispatch ] = useReducer(shopProductReducer,initialState);
+    const [productDataState , productDataDispatch ] = useReducer(shopProductReducer,initialState);
+    const [currentPage, setCurrentPage] = useState(1);
+    //let [hasNext, sethasNext] = useState(true);
+    
+    const loadMore = () => {
+        let Page = currentPage + 1 ;
+        fetchdata(Page,true);
+        setCurrentPage(Page); 
+    }
 
-    const fetchdata = async (pageno = 1) => {
-         try {
-            const result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${pageno}`);
+    const LoadMoreState = (value = false) => {
+        productDataDispatch({
+            type: 'HASNEXT',
+            data: value
+        });
+    }
+
+    const fetchdata = async (pageno = 1, Add = false) => {
+        const result = await FetchProducts(null,3,pageno);
+        if(result){
             const products = result.data.products
             const shopProducts = products.map(row => {return { pid : row._id ,...row}});
-            //console.log(shopProducts);
-            productDataDispatch({
-                type: 'FETCH_UP',
-                data: shopProducts
-            });
             
-        } catch (error) {
-            if (error.response) {
-                toast.error(error.response.data.error.message)
-           }else{
-               toast.error(error.message,{
-                   position: toast.POSITION.TOP_CENTER,
-                   autoClose: false
-               })
-           }
+            if(result.data.next){
+                LoadMoreState(true);
+            }else{
+                LoadMoreState();
+            }
+
+            if(Add){
+                productDataDispatch({
+                    type: 'ADD_ON',
+                    data: shopProducts
+                });
+            }else{
+                productDataDispatch({
+                    type: 'FETCH_UP',
+                    data: shopProducts
+                });
+            }
+            
+        }else{
             productDataDispatch({
                 type: 'FETCH_DOWN',
-            })
+            });
         } 
-        
     }
     useEffect(() => {
         fetchdata();
     },[]) 
 
     return(
-        <>
-            <h1>this is Shop  </h1>
-            <SearchProduct/>
-            { poductDataState.loading ? (<h1>loading</h1>) : (<ShopProducts data={poductDataState.productdata}  />) }
-        </>
+        <div id="shop">
+            <h1>Shop</h1>
+            <div id="shop_main" >
+                <div id="main_side">
+                    <ShopSideBar productDataDispatch={productDataDispatch} fetchData ={fetchdata} />
+                </div>
+                <div id="main_center">
+                    {productDataState.loading ? (
+                        productDataState.error ? (<LoadingComponent message="Somthing went Wrong" />) : (<LoadingComponent />)
+                    ) : (<ShopProducts data={productDataState.productdata} />)}
+
+                    {productDataState.hasNext ? (<button className="load_more_button" onClick={() => loadMore()} >Load More</button>) : (<h3 className="load_more_button">Oops! No More Products</h3>)}
+                </div>
+            </div>
+        </div>
     );
 };
 

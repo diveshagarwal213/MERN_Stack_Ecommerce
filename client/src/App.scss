@@ -12,20 +12,21 @@ body {
     padding: 0;
 }
 
-
-
 :root {
     font-size: 16px;
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
     --text-light:white;
     --text-dark:black;
+
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
-    --transition-speed: 600ms;
+    
     --icons-color:#df49d8;
+    --transition-speed: 600ms;
     --nav-dot: white;
     --nav-dot-text: #df49d8;
+
     --box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     --hover-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
    /*  --icons-color:#ff9999; */
@@ -49,6 +50,19 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: var(--icons-color);
+}
+
+@mixin buttonTheme {
+    box-shadow: var(--box-shadow);
+    padding: 13px 20px;
+    border-radius: 10px;
+    color: var(--icons-color);
+    background-color: transparent;
+    &:hover{
+        box-shadow: var(--hover-box-shadow);
+        color: white;
+        background-color: var(--icons-color);
+    }
 }
 
 datalist{
@@ -104,7 +118,7 @@ input{
 #main {
     margin-left: 5rem;
 }
-#empty {
+.empty {
     height: 130px;
 }
 

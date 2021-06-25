@@ -64,6 +64,7 @@ const App = () => {
                 <Route path="/admin1" component={ Admin } />
                 <Route  component={Error} />
             </Switch>
+          <div className="empty"></div>
           </div>
         </CartContext.Provider>
       </Router>

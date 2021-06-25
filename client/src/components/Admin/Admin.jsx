@@ -25,7 +25,6 @@ const Admin =  () => {
             {adminNav === "ADMIN_PROFILE" ? ("this is ADMIN_PROFILE") : ("")}
             
             
-            <div id="empty"></div>
         </div>
     )
 };
