@@ -20,6 +20,12 @@ const ProductSchema = new mongoose.Schema({
             lowercase:true
         }
     ],
+    flavors:[
+        {
+            type:String,
+            lowercase:true
+        }
+    ],
     image:{
         type:String,
         required: [true,"please provid a ProductImage"]

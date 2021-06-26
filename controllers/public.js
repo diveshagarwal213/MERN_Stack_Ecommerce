@@ -2,6 +2,7 @@ const Product = require('../models/Product.models');
 const creatErr = require('http-errors');
 const pagination = require('../utils/pagination');
 const path = require('path');
+const {StringToArray} = require('../utils/Other'); 
 
 const mostPopular = async(req, res, next) => {
     try {
@@ -26,33 +27,43 @@ const mostPopular = async(req, res, next) => {
 
 const productName = async(req, res, next) => {
     try {
-        let products;
-        
-        const {name} = req.params
-        let keys = name.split(" ");
+        let products = [];
+        const {keyword} = req.params
 
-        const {mostpopular, categories} = req.query
+        products = await Product.find({name : {$regex: keyword, $options: 'i'}});
 
-        if (categories === "true") {
-            if(mostpopular === "true"){
-                products = await Product.find({categories: {$all : keys}}).sort({totalorders : -1 });
+        if(products.length <= 0) throw creatErr.BadRequest("No products found");
+
+        res.send({products});
+    } catch (error) {
+        next(error);
+    }
+};
+
+const CatAndFlav = async (req, res, next) => {
+    let products =[];
+    const { categories, flavors} = req.query
+    let categorie = StringToArray(categories);
+    let flavor = StringToArray(flavors);
+
+    try {
+        if(categories){
+            if(flavors){
+                products = await Product.find({$and : [{categories: {$all : categorie}}, {flavors: {$in : flavor}}]});
             }else{
-                products = await Product.find({categories: {$all : keys}});
+                products = await Product.find({categories: {$in : categorie}});
             }
         }else{
-            if(mostpopular === "true"){
-                products = await Product.find({$or : [{name : {$regex: name, $options: 'i'}}, {categories: {$all : keys}}]}).sort({totalorders : -1 });
-            }else{
-                products = await Product.find({$or : [{name : {$regex: name, $options: 'i'}}, {categories: {$all : keys}}]});
-            }
+            products = await Product.find({flavors: {$in : flavor}});
         }
         
-        if(products.length <= 0) throw creatErr.BadRequest("No products found")
+        if(products.length <= 0) throw creatErr.BadRequest("No products found");
         
         res.send({products});
     } catch (error) {
-        next(error)
+        next(error);
     }
+    
 };
 
 const productId = async (req, res, next) => {
@@ -135,11 +146,16 @@ const images =  (req, res, next) => {
 
 const allDistinctCategories = async (req, res, next) => {
     try {
-        const categories = await Product.distinct("categories");
-        res.send({categories});
+        const  {fav} = req.query
+        let flavors;
+        if(fav){
+            flavors = await Product.distinct("flavors");
+        }
+            const  categories = await Product.distinct("categories");
+        res.send({categories, flavors });
     } catch (error) {
         next(error)
     }
 }; 
 
-module.exports = {products,  mostPopular, productName, productId, images, allDistinctCategories};
+module.exports = {products,  mostPopular, productName, productId, images, allDistinctCategories, CatAndFlav};

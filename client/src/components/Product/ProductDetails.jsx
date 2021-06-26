@@ -4,14 +4,17 @@ import LoadingComponent from '../../utils/LoadingComponent'
 import { useContext } from 'react';
 import {CartContext} from '../../App'
 
+function ArrayToString (array) {
+    if(typeof array !== "object") return "";
+    return array =  array.join(" ")
+}
+
 const ProductD = (props) => {
-    const {categories, _id, about, name, image, price, createdAt} = props.data
+    const {categories, _id, about, name, image, price, createdAt, flavors} = props.data
     
     let newdata = props.data;
     newdata = {...newdata, pid: _id};
-
-    //!loading state,   categories.join(" "); gives an error 
-    let cat = categories.join(" ");  
+ 
     let date = new Date(createdAt);
 
     const cartContext = useContext(CartContext);
@@ -25,7 +28,8 @@ const ProductD = (props) => {
                 <h3>₹ {price}</h3>
                 <p> {about} </p>
                 <button onClick={() => cartContext.cartDispatch({ type: 'onAdd', product: newdata})} >Add to Cart</button>
-                <p>Categories : {cat}</p>
+                <p>Categories : {ArrayToString(categories)}</p>
+                <p>Flavors : {ArrayToString(flavors)}</p>
                 <p>Created on : {date.toDateString()}</p>
 
             </div>

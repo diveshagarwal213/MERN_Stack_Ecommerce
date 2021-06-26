@@ -1,26 +1,47 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import SearchProduct from "../../utils/FetchSearchProduct";
+import SearchProductByName, {SearchByCatAndFlav} from "../../utils/FetchSearchProduct";
 import axios from "axios";
 
 const ShopSideBar =  (props) => {
 
     const {productDataDispatch, fetchData} = props;
     const [search , setsearch] = useState('');
-    const [catarr, setcatarr] = useState([]);
-    const [defaultCategories, setDefaultCategories] = useState(["shake"]);
+    //const [catarr, setcatarr] = useState([]);
+    //const [favarr, setfavarr] = useState([]);
+    const [Categories, setCategories] = useState({
+        defaultarr:[],
+        userSelect:[]
+    });
+    const [Flavors, setFlavors] = useState({
+        defaultarr:[],
+        userSelect:[]
+    });
 
     const fetchCategories = async () => {
-        const result = await axios.get(`http://${window.location.hostname}:5000/public/alldistinctcategories`);
+        const result = await axios.get(`http://${window.location.hostname}:5000/public/alldistinctcategories?&fav=true`);
         if(result){
             let Categories  = result.data.categories
-            setDefaultCategories(Categories);
+            let flavors  = result.data.flavors
+            setCategories((pre) => {
+                return {
+                    ...pre,
+                    defaultarr: Categories
+                }
+            });
+            setFlavors(pre => {
+                return {
+                    ...pre,
+                    defaultarr: flavors
+                }
+            });
         }
     }
 
-    const searchHandler = async (searchKey ,mostPupular = false, cat=false) => {
-        if(searchKey.length >= 3 ) {
-            const result = await SearchProduct(searchKey,mostPupular,cat);
+    const searchHandler = async ( search) => {
+
+        if(search.length >= 3 ){
+            const result = await SearchProductByName(search);
             if(result){
                 const products = result.data.products
                 const shopProducts = products.map(row => {return { pid : row._id ,...row}});
@@ -34,31 +55,45 @@ const ShopSideBar =  (props) => {
                 });
             }
         }else{
-            if (cat){
-                fetchData();
-            }else{
-                toast.warning("type at least 3 words");
-            }
-        } 
+            toast.warning("type at least 3 words");
+        }
     }
 
-    const SearchByCat = (keyword) => {
-        let n = catarr.includes(keyword);
-        if(n){
-            n = [...catarr];
+    const CatOrFlaHandler = () => {
+        SearchByCatAndFlav()
+    }
+
+    const CatOrflav = (keyword) => {
+        let n = Categories.userSelect.includes(keyword);
+        if(n){//remove
+            console.log("remove");
+            n = Categories.userSelect;
+            
             let  index = n.indexOf(keyword);
-            n.splice(index, 1);
-            setcatarr(n);
-        }else{
-            n = [...catarr, keyword]
-            setcatarr(n);
-        }
-        n = n.join(" "); 
-        searchHandler(n,true,true);
+
+            n.splice(index, 1);//return deleted value
+
+            setCategories((pre) => {
+                return{
+                    ...pre,
+                    userSelect: n
+                }
+            });
+
+        }else{//add
+            let y = Categories.userSelect;
+            setCategories((pre) => {
+                return{
+                    ...pre,
+                    userSelect: [...y, keyword]
+                }
+            });
+        } 
+        
     };  
 
     const resetShop = () =>{
-        setcatarr([]);
+        //setcatarr([]);
         setsearch("");
         fetchData();
     }
@@ -76,10 +111,12 @@ const ShopSideBar =  (props) => {
                 <button onClick={()=> resetShop() } >Reset Shop</button>
             <div id="default_categories">
                 <h3>Select Categories</h3>
-                { defaultCategories.map(n => (<button key={n} onClick ={() => SearchByCat(n)}>{n}</button>)) }
+                { Categories.defaultarr.map(n => (<button key={n} onClick ={() => CatOrflav(n)}>{n}</button>)) }
+                <h3>Select Flavors</h3>
+                { Flavors.defaultarr.map(n => (<button key={n} onClick ={() => CatOrflav(n)}>{n}</button>)) }
             </div>
             <div id="user_selected_Categories">
-                {catarr.map(n => (<button key ={n} onClick={() => SearchByCat(n)} > {n} X </button> ) )}
+                {Categories.userSelect.map(n => (<button key ={n} onClick={() => CatOrflav(n)} > {n} X </button> ) )}
             </div>
         </div>
     );

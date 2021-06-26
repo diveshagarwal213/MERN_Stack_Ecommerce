@@ -11,7 +11,8 @@ const AddProducts = () => {
         name: "",
         price: "",
         about: "",
-        categories: ""
+        categories: "",
+        flavors:""
     });
 
     const fileChangeHandler = (e) => {
@@ -43,6 +44,7 @@ const AddProducts = () => {
         Data.append('name', productData.name);
         Data.append('price', productData.price);
         Data.append('categories', productData.categories);
+        Data.append('flavors', productData.flavors);
         Data.append('about', productData.about);
         //console.log(Array.from(Data));
         
@@ -58,7 +60,8 @@ const AddProducts = () => {
             name: "",
             price: "",
             about: "",
-            categories: ""
+            categories: "",
+            flavors: ""
         })
 
        } catch (error) {
@@ -79,6 +82,7 @@ const AddProducts = () => {
                         <input type="text" onChange={inputHandler} placeholder='name' value={productData.name} name='name' />
                         <input type="number" onChange={inputHandler} placeholder='price' value={productData.price} name='price' />
                         <input list="categories" type="text" onChange={inputHandler} placeholder='categories' value={productData.categories} name='categories' />
+                        <input list="flavors" type="text" onChange={inputHandler} placeholder='flavors' value={productData.flavors} name='flavors' />
                         <textarea  onChange={inputHandler} placeholder='about' value={productData.about} name='about' />
                         <label htmlFor="fileData"> Browser image </label>
                         <input type="file" id="fileData" onChange={fileChangeHandler} />
@@ -86,6 +90,11 @@ const AddProducts = () => {
 
                         <datalist id="categories">
                             <option value="cake" />
+                            <option value="cupcake" />
+                            <option value="shake" />
+                        </datalist>
+
+                        <datalist id="flavors">
                             <option value="chocolate" />
                             <option value="Vanilla" />
                             <option value="coconut" />

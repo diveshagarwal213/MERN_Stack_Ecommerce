@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import FetchProducts from "../../../utils/FetchProducts";
-import SearchProduct from '../../../utils/FetchSearchProduct';
+import SearchProductByName from '../../../utils/FetchSearchProduct';
 import { toast } from "react-toastify";
 
 const UProducts = (props) => {
@@ -29,9 +29,9 @@ const SearchBox = (props) => {
         }
     }
 
-    const SearchHandler = async (mostpopular = false , categories = false) => {
+    const SearchHandler = async () => {
         if(searchkey.length >= 3 ){
-            const result = await SearchProduct(searchkey, mostpopular, categories);
+            const result = await SearchProductByName(searchkey);
             if(result) setnewProducts(result.data.products);
         }else{
             toast.warning("Type at least 3 character");
