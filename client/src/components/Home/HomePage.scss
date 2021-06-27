@@ -1,3 +1,4 @@
+@import '../../utils/scss/mixin.scss';
 
 /*owl theme for all home page*/
 .owl-theme {
@@ -161,20 +162,11 @@
         color: var(--icons-color);
     }
     button{
-        color: var(--icons-color);
-        box-shadow: var(--box-shadow);
-        background: white;
+        @include buttonTheme;
         font-size: 12px;
-        padding: 13px 20px;
         border-radius: 10px;
         font-weight: 700;
-        text-transform: capitalize;
         line-height: 1;
-        &:hover{
-            box-shadow: var(--hover-box-shadow);
-            color: white;
-            background-color: var(--icons-color);
-        }
     }
 }
 

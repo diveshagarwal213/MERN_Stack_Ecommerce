@@ -13,14 +13,14 @@ const SearchProductByName = async (keyword) => {
 
 const SearchByCatAndFlav = async (cat, fav) => {
     try {
-        let result
+        let result;
         if(cat){
             if(fav){
                 result = await axios.get(`http://${window.location.hostname}:5000/public/catandflav?categories=${cat}&flavors=${fav}`);
             }else{
                 result = await axios.get(`http://${window.location.hostname}:5000/public/catandflav?categories=${cat}`);
             }
-        }else{
+        }else if(fav){
             result = await axios.get(`http://${window.location.hostname}:5000/public/catandflav?flavors=${fav}`);
         }
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import ApiErrorHandler from "./ClientOther";
 
 const FetchProducts = async (categories = null, limit = null , page = null) => {
 
@@ -37,12 +38,7 @@ const FetchProducts = async (categories = null, limit = null , page = null) => {
         return result;
 
     } catch (error) {
-        if (error.response) {
-            toast.error(error.response.data.error.message)
-       }else{
-           toast.error(error.message)
-       }
-        return null
+        ApiErrorHandler(error);
     }
 }
 

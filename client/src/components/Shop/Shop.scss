@@ -1,21 +1,22 @@
 @import '../../utils/scss/mixin.scss';
 /*----Shop----*/
-
+#shop{
+    background-color: #ececec;
+}
 
 /*---shopMain----*/
 #shop_main{
     //border: 1px solid green;
     display: flex;
-    
 }
 
 #main_side{
     //border: 1px solid red;
-    width: 30%;
+    flex-shrink: 0;
 }
 #main_center{
     //border: 1px solid blue;
-    width: 69%;
+    flex-grow: 1;
 
     .load_more_button{
         width: calc(100% - 20px);
@@ -29,6 +30,7 @@
 /*----Shop_side bar----*/
 #shop_side_bar{
     padding: 0px 5px;
+    max-width: 350px;
     //box-shadow: var(--box-shadow);
 
     button{
@@ -50,17 +52,19 @@
     }
 }
 #shop_search_product{
-    
     display: flex;
     justify-content: space-around;
+    overflow: hidden;
     input[type=text]{
         border: none;
         font-size: large;
-        margin: 10px 0px;
+        width: 60%;
     }
 
     button{
         box-shadow: none;
+        padding: 10px 15px;
+        outline: 1px ;
     }
 
 }
@@ -69,6 +73,7 @@
     max-height: 350px;
     overflow: scroll;
     h3{
+        color: var(--icons-color);
         line-height: 1;
         text-align: center;
     }
@@ -82,8 +87,7 @@
     button{
         width: calc(50% - 10px);
         margin: 5px;
-        color: white;
-        background-color: var(--icons-color);
+        color: var(--icons-color);
 
     }
 }
@@ -107,11 +111,17 @@
 }
 
 @media only screen and (max-width: 600px) {
+
+    
     
     #shop_main{
         flex-direction: column;
         #main_side{
             width: 100%;
+            
+            #shop_side_bar{
+                max-width: none;
+            }
         }
         #main_center{
             width: 100%;

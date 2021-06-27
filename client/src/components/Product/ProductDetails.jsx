@@ -3,11 +3,7 @@ import FetchSingleProduct from '../../utils/FetchSingleProduct';
 import LoadingComponent from '../../utils/LoadingComponent'
 import { useContext } from 'react';
 import {CartContext} from '../../App'
-
-function ArrayToString (array) {
-    if(typeof array !== "object") return "";
-    return array =  array.join(" ")
-}
+import { ArrayToString } from '../../utils/ClientOther';
 
 const ProductD = (props) => {
     const {categories, _id, about, name, image, price, createdAt, flavors} = props.data

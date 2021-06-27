@@ -69,6 +69,9 @@ const CatAndFlav = async (req, res, next) => {
 const productId = async (req, res, next) => {
     try{
         const { id } = req.params
+        
+        if(!id.match(/^[0-9a-fA-F]{24}$/)) throw creatErr.BadRequest("Not a Valid Product");
+
         const product = await Product.findOne({_id: id});
         
         if(!product) throw creatErr.BadRequest();

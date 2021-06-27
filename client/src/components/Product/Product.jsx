@@ -17,7 +17,7 @@ const ProductCard = (props) => {
                 <div className="productCard_img" style={{ backgroundImage: `url('http://${window.location.hostname}:5000/public/images/${product.image}')` }} ></div>
             </Link>
             <div>
-                <h3>{product.name}</h3>
+                {/* <h3>{product.name}</h3> */}
                 <p>₹ {product.price}</p>
             </div>
             <button onClick={() => cartContext.cartDispatch({ type: 'onAdd', product: product})} >Add to Cart</button>

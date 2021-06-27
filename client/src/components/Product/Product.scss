@@ -1,21 +1,14 @@
+@import '../../utils/scss/mixin.scss';
+
 .product_card_div {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    box-shadow: var(--box-shadow);
     overflow: hidden;
     margin: 0px 10px 20px 10px;
     text-align: center;
     transition: 0.3s;
     position: relative;
-    padding-bottom: 15px;
-
-    &:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    a{
-        text-decoration: none;
-        color: black;
-    }
+    padding-bottom: 15px;   
 
     h3 {
         font-weight: 400;
@@ -30,21 +23,13 @@
     }
 
     button {
+        @include buttonTheme;
+        border-radius: 30px;
         color: var(--icons-color);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        background: white;
-        font-size: 12px;
-        padding: 13px 20px;
-        border-radius: 50px;
         font-weight: 700;
+        font-size: small;
         text-transform: uppercase;
         line-height: 1;
-
-        &:hover {
-            color: white;
-            background-color: var(--icons-color);
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
     }
 }
 

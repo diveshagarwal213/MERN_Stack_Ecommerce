@@ -1,3 +1,5 @@
+@import '../../utils/scss/mixin.scss';
+
 #empty_cart{
     font-family: 'Pacifico', cursive;
     font-size: xx-large;
@@ -18,13 +20,8 @@
     width: 80%;
     overflow: hidden;
     display: flex;
-    
     margin: 15px 0px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-
-    &:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
+    box-shadow: var(--box-shadow);
 
     div {
         min-height: 150px;
@@ -69,21 +66,18 @@
 
     h4{
         margin: 0;
+        box-shadow: var(--box-shadow);
+        border-radius: 30px;
     }
 
     button {
+        @include buttonTheme;
         padding: 6px 12px;
-        border-radius: 10px;
+        border-radius: 7px;
         font-size: medium;
         font-weight: 600;
         margin: 10px;
-        box-shadow: var(--box-shadow);
-        background-color: transparent;
-
-        &:hover {
-            color: var(--icons-color);
-            box-shadow:  var(--hover-box-shadow);
-        }
+        box-shadow: none;
     }
 
     h3~button{
@@ -95,7 +89,7 @@
         min-width: 30px;
         box-shadow: none;
         
-        &:hover{
+        &:active{
             opacity: 1;
             color: red;
             box-shadow: none;
@@ -116,25 +110,13 @@
     text-transform: capitalize;
     font-weight: 500;
 
-    &:hover{
-        box-shadow: var(--hover-box-shadow);
-    }
-
     h3{
         color: var(--icons-color);
     }
 
     button{
-        box-shadow: var(--box-shadow);
-        padding: 8px 15px;
-        text-transform: capitalize;
-        border-radius: 10px;
-        font-size: large;
-        background: transparent;
-        &:hover{
-            box-shadow: var(--hover-box-shadow);
-            color: var(--icons-color);
-        }
+        @include buttonTheme;
+        font-size: medium;      
     }
 }
 

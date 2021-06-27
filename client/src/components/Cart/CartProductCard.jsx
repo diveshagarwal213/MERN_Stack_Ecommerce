@@ -25,9 +25,7 @@ const CartProductCard = (props) => {
             <div className='cartP_card_content'>
                 <h2>
                     {product.name}
-                    <p>Id : {product.pid}</p>
                 </h2>
-
                 <h4>
                     <button onClick={() => cartContext.cartDispatch({ type: 'onRemove', product: product })} >-</button>
                     <span>{product.qty}</span>

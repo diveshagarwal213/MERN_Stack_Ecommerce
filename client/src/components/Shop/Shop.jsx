@@ -67,10 +67,7 @@ const Shop = () => {
             });
         } 
     }
-    useEffect(() => {
-        fetchdata();
-    },[]) 
-
+    
     return(
         <div id="shop">
             <h1>Shop</h1>
