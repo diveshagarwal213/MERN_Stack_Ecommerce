@@ -85,6 +85,10 @@ input{
     &:focus{
         box-shadow: var(--box-shadow--inset);
     }
+    
+}
+::placeholder{
+    color: lightgray;
 }
 
 button{

@@ -120,26 +120,40 @@ const ShopSideBar =  (props) => {
         fetchCategories()
     },[])
 
+    const filterBtn = () => {
+        const filterDiv = document.getElementById("filter_div");
+        if (filterDiv.style.display === "none") {
+            filterDiv.style.display = "block";
+        } else {
+            filterDiv.style.display = "none";
+        }
+    }
+
     return(
         <div id="shop_side_bar">
             <div id='shop_search_product'>
                 <input type="text" value={search} name='keyword' placeholder='Name' onChange={(e) => setsearch(e.target.value)} />
                 <button onClick={() => searchHandler(search)}>Search</button>
             </div>
-                <button onClick={()=> resetShop() } >Reset Shop</button>
-            <div id="default_categories">
-                <h3>Select Categories</h3>
-                { defaultCategories.map(n => (<button key={n} onClick ={() => CatOrflav(n)}>{n}</button>)) }
+
+            <button onClick={()=> resetShop() } >clear all</button>
+            <button onClick={filterBtn} >Filter</button>
+            
+            <div id="filter_div">
                 
-                {catarr.length < 2 ? (
-                    <>
-                    <h3>Select Flavors</h3>
-                    { defaultFlavors.map(n => (<button key={n} onClick ={() => CatOrflav(n,true)}>{n}</button>)) }
-                    </>
-
-                ) : ("") }
-
+                <h3>Select Categories</h3>
+                
+                <div className="default_categories">
+                    {defaultCategories.map(n => (<button key={n} onClick={() => CatOrflav(n)}>{n}</button>))}
+                </div>
+                
+                <h3>Select Flavors</h3>
+                
+                <div className="default_categories" >
+                    {defaultFlavors.map(n => (<button key={n} onClick={() => CatOrflav(n, true)}>{n}</button>))}
+                </div>
             </div>
+            
             <div id="user_selected_Categories">
                 {catarr.map(n => (<button key ={n} onClick={() => CatOrflav(n)} > {n} X </button> ) )}
                 {flavarr.map(n => (<button key ={n} onClick={() => CatOrflav(n,true)} > {n} X </button> ) )}

@@ -49,7 +49,11 @@ const CatAndFlav = async (req, res, next) => {
     try {
         if(categories){
             if(flavors){
-                products = await Product.find({$and : [{categories: {$all : categorie}}, {flavors: {$in : flavor}}]});
+                let productarr;
+                for(let x of categorie){
+                    productarr = await Product.find({$and : [{categories: {$in : x}}, {flavors: {$in : flavor}}]});
+                    products = [...productarr,...products] ;
+                }
             }else{
                 products = await Product.find({categories: {$in : categorie}});
             }

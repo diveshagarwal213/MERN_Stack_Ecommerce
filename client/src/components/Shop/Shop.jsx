@@ -37,7 +37,11 @@ const Shop = () => {
         });
     }
 
-    const fetchdata = async (pageno = 1, Add = false) => {
+    const fetchdata = async (pageno , Add = false) => {
+        if(!pageno){
+            pageno = 1;
+            setCurrentPage(1);
+        }
         const result = await FetchProducts(null,3,pageno);
         if(result){
             const products = result.data.products

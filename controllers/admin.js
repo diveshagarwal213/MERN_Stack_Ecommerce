@@ -1,19 +1,9 @@
 const Product = require('../models/Product.models');
 const {productJoi} = require('../utils/joiSchemas')
 const createErr = require('http-errors');
-const fs = require('fs');
 const path = require('path');
+const {StringToArray, unlinkImage} = require('../utils/Other'); 
 
-const {StringToArray} = require('../utils/Other'); 
-
-const unlinkImage = (path) => {
-    fs.unlink(path, (err) => {
-        if (err) {
-          console.error(err)
-        }
-        //file removed if saved
-    });
-}
 
 const addProduct = async (req, res, next) => {
 
@@ -110,5 +100,9 @@ const deleteProduct = async (req,res,next) => {
         next(error);
     }
 };
+
+const placeOrders = async (req, res, next) => {
+
+} 
 
 module.exports = { addProduct, updateProduct, deleteProduct };
