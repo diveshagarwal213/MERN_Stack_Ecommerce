@@ -9,4 +9,15 @@ const productJoi = Joi.object({
     image: Joi.string().required()
 });
 
-module.exports = { productJoi }
+const userJoiSchema = Joi.object({
+    username: Joi.string().max(20).required(),
+    email: Joi.string().email().lowercase().required(),
+    password: Joi.string().min(4).required(),
+});
+
+const loginSchema = Joi.object({
+    email: Joi.string().email().lowercase().required(),
+    password: Joi.string().min(4).required(),
+});
+
+module.exports = { productJoi, userJoiSchema, loginSchema }

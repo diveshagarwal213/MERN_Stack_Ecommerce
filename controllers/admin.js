@@ -101,8 +101,5 @@ const deleteProduct = async (req,res,next) => {
     }
 };
 
-const placeOrders = async (req, res, next) => {
-
-} 
 
 module.exports = { addProduct, updateProduct, deleteProduct };

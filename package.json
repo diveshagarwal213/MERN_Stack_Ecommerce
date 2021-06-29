@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon server.js",
     "client": "cd client && npm start",
-    "dev": "concurrently -n 'server,client' -c 'white,blue' \"nodemon server.js\" \"npm run client\""
+    "dev": "concurrently -n 'server,client' -c 'white,blue' \"nodemon server.js\" \"npm run client\"",
+    "playground": "cd test && node playGround.js"
   },
   "keywords": [],
   "author": "",

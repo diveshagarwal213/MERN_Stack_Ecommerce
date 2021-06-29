@@ -20,8 +20,10 @@ app.use(cors({
 }))
 
 //routes
+app.use('/auth', require('./routes/auth.routes'));
 app.use('/public', require('./routes/public.routes'));
 app.use('/admin', require('./routes/admin.routes'));
+app.use('/private', require('./routes/private.routes'));
 
 //404 routes 
 app.use(async (req,res,next) => {
