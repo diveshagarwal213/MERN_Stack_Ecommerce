@@ -11,6 +11,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ececec;
+    //background-color: #ecf0f3;
 }
 
 :root {
@@ -28,10 +29,8 @@ body {
     --nav-dot: white;
     --nav-dot-text: #df49d8;
 
-/*     --box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
     --box-shadow: -10px -10px 15px rgba(255,255,255,0.55), 10px 10px 15px rgba(70,70,70,0.12);
     --box-shadow--inset: inset -10px -10px 15px rgba(255,255,255,0.55), inset 10px 10px 15px rgba(70,70,70,0.12);
-    --hover-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
    /*  --icons-color:#ff9999; */
 }
 

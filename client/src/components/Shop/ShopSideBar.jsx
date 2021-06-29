@@ -122,10 +122,10 @@ const ShopSideBar =  (props) => {
 
     const filterBtn = () => {
         const filterDiv = document.getElementById("filter_div");
-        if (filterDiv.style.display === "none") {
-            filterDiv.style.display = "block";
-        } else {
+        if (filterDiv.style.display === "block") {
             filterDiv.style.display = "none";
+        } else {
+            filterDiv.style.display = "block";
         }
     }
 
@@ -137,7 +137,7 @@ const ShopSideBar =  (props) => {
             </div>
 
             <button onClick={()=> resetShop() } >clear all</button>
-            <button onClick={filterBtn} >Filter</button>
+            <button className="filter_btn" onClick={filterBtn} >Filter</button>
             
             <div id="filter_div">
                 

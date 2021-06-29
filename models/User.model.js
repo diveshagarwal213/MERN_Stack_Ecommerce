@@ -80,12 +80,16 @@ UserSchema.methods.getAccessToken = async function () {
 
 
 //reset_password_token
-UserSchema.methods.getResetPassToken = function (){
-    const resetToken = crypto.randomBytes(20).toString("hex");
-
-    this.resetPassToken = crypto.createHash("sha256").update(resetToken).digest("hex");
-    this.resetPassExpire = Date.now() + 10 * (60 * 1000); //10min
-    return resetToken;
+UserSchema.methods.getResetPassToken = async function (){
+    try {
+        const resetToken = crypto.randomBytes(20).toString("hex");
+        this.resetPassToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+        this.resetPassExpire = Date.now() + 10 * (60 * 1000); //10min
+        await this.save();
+        return resetToken;
+    } catch (error) {
+        return null;
+    }
 }
 
 const User = mongoose.model('users', UserSchema);

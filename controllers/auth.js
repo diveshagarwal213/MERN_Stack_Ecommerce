@@ -2,19 +2,20 @@ const User = require('../models/User.model');
 const createErr = require('http-errors');
 const {userJoiSchema, loginSchema} = require('../utils/joiSchemas');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 const register = async (req,res,next) => {
     try {
         const result = await userJoiSchema.validateAsync(req.body); //joi
         
         const doseExist = await User.findOne({email: result.email});
-        if(doseExist) throw createErr.Conflict(`${result.email} is already been register`);
+        if(doseExist) throw new createErr.Conflict(`${result.email} is already been register`);
         
         const user = new User(result);
         const saveUser = await user.save();
         const accessToken = await saveUser.getAccessToken();
 
-        if(!accessToken) throw createErr.InternalServerError("jwt error");
+        if(!accessToken) throw new createErr.InternalServerError("jwt error");
         res.send({accessToken});
     
     } catch (error) {
@@ -29,14 +30,14 @@ const login = async (req,res,next) => {
             
         const user = await User.findOne({email: result.email}).select("+password");
 
-        if(!user) throw createErr.Unauthorized("Invalid Credentials");
+        if(!user) throw new createErr.Unauthorized("Invalid Credentials");
 
         const isMatch = await user.checkCredentials(result.password);
-        if(!isMatch) throw createErr.Unauthorized("Invalid Credentials")
+        if(!isMatch) throw new createErr.Unauthorized("Invalid Credentials")
 
         const accessToken = await user.getAccessToken();
         
-        if(!accessToken) throw createErr.InternalServerError("jwt error");
+        if(!accessToken) throw new createErr.InternalServerError("jwt error");
 
         res.send({accessToken});
 
@@ -54,7 +55,7 @@ const logout = async (req, res, next) => {
         };
 
         jwt.verify(token, process.env.JWT_KEY , (error,playload)=>{
-            if(error) throw createErr.BadRequest("Token not valid");
+            if(error) throw new createErr.BadRequest("Token not valid");
             tokenId = playload.jti;
             userId = playload.id;
         });
@@ -73,4 +74,52 @@ const logout = async (req, res, next) => {
     }
 };
 
-module.exports = {register, login, logout};
+const forgotPassword = async (req, res,next) => {
+    try {
+        const {email} = req.body;
+        const user = await User.findOne({email: email});
+        if(!user) throw new createErr.BadRequest();
+
+        const resetPassToken = await user.getResetPassToken();
+        if(!resetPassToken) throw new createErr.InternalServerError();
+        const resetUrl = `http://localhost:5000/auth/resetpassword/${resetPassToken}`;
+            
+        const message = ` this is in for an exapmple, in real life/production this link "${resetUrl}" will send to the user email `;
+        //<a href="${resetUrl}" clicktracking="off" >Reset Password</a>
+        
+
+        res.send({message});
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+const resetPassword = async (req,res,next) => {
+    const resetPassToken = crypto.createHash("sha256").update(req.params.resettoken).digest("hex");
+    const {password} = req.body;
+    console.log(resetPassToken, password);
+    try {
+        if(!resetPassToken) throw new createErr.Unauthorized()
+        const user = await User.findOne({
+            resetPassToken,
+            resetPassExpire: {$gt : Date.now()}
+        });
+
+        if(!user) throw new createErr.Unauthorized();
+
+        user.password = req.body.password;
+        user.resetPassToken = undefined;
+        user.resetPassExpire = undefined;
+
+        await user.save(); 
+        
+        res.send("ok");
+
+    } catch (error) {
+        next(error);
+    }
+        
+};
+
+module.exports = {register, login, logout, forgotPassword, resetPassword};
