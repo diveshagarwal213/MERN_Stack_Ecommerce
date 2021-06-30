@@ -3,14 +3,13 @@ const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema({
     name:{
         type: String,
-        require: [true,"please provid a ProductName"],
-        unique:true,
+        required: [true,"please provid a ProductName"],
         trim:true,
         lowercase:true
     },
     price:{
         type: Number,
-        require: [true,"please provid a ProductPrice"]
+        required: [true,"please provid a ProductPrice"]
     },
     about: {
         type: String
@@ -21,9 +20,15 @@ const ProductSchema = new mongoose.Schema({
             lowercase:true
         }
     ],
+    flavors:[
+        {
+            type:String,
+            lowercase:true
+        }
+    ],
     image:{
         type:String,
-        require: [true,"please provid a ProductImage"]
+        required: [true,"please provid a ProductImage"]
     },
     totalorders:{
         type: Number,

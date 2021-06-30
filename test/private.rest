@@ -1,0 +1,20 @@
+POST http://localhost:5000/private/placeorder HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "example id",
+    "items": [
+        {
+            "_id": "60c34ee5b4a84026f89d3878",
+            "qty": 1
+        },
+        {
+            "_id":"60d974c18e545e0ad81ebc11",
+            "qty": 2
+        }
+    ]
+}
+
+### private test
+GET http://localhost:5000/private/privatetest HTTP/1.1
+Authorization: Bearer

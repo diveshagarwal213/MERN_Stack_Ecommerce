@@ -18,9 +18,9 @@ import {classesOpenSvg} from '../../images/allSvg';
 
 const CenterHeading =  props => {
     return(
-        <div id="center_heading" >
+        <div className="center_heading" >
             <h2>{props.heading}</h2>
-            <div id="center_heading_icons">
+            <div className="center_heading_icons">
               <div></div>
               <img src={cupcakePng} alt="sweet" />
               <div></div>
@@ -28,6 +28,19 @@ const CenterHeading =  props => {
         </div>
     )
 };
+
+const CookingClasses = props =>{
+  return(
+    <div id="class_open"  >
+      <div id="class_openContent">
+        <h1>Cooking classes</h1>
+        <p></p>
+        <button>Join Now</button>
+      </div>
+      <div id="class_openSvg" > {classesOpenSvg} </div>
+    </div>
+  )
+}
 
 const  Home = () => {
 
@@ -37,7 +50,7 @@ const  Home = () => {
   const [newproducts, setNewProducts ] = useState([]);
 
   const mostPopularProducts = async () => {
-    const result = await FetchMostPopular(10);
+    const result = await FetchMostPopular(3);
     if (result) {
       let products = result.data.products;
       products = products.map(x => {return{pid : x._id, ...x}});
@@ -46,7 +59,7 @@ const  Home = () => {
   }
 
   const newProducts = async () => {
-    const result = await FetchProducts(false,10);
+    const result = await FetchProducts(false,3);
     if (result) {
       let products = result.data.products;
       products = products.map(x => {return{pid : x._id, ...x}});
@@ -64,21 +77,10 @@ const  Home = () => {
       <HeadCarousel />
       <CenterHeading heading="most popular" />
       {mostpoplar.length > 0 ? (<HomeProductCaro data={mostpoplar}/>) : (<LoadingComponent/>) }
-      {/* <div id="class_open"  >
-        <div id="class_openContent">
-          <h1>Class Opening</h1>
-          <h2>Snack Cake</h2>
-          <div>
-            <p>01:00 PM Monday</p>
-            <p>02:00 PM Monday</p>
-          </div>
-        </div>
-        <div id="class_openSvg" > {classesOpenSvg} </div>
-      </div> */}
-      {/* <CenterHeading heading="new products" />
-      {newproducts.length > 0 ? (<HomeProductCaro data={newproducts}/>) : (<LoadingComponent/>) } */}
+      <CookingClasses/>
+      <CenterHeading heading="new products" />
+      {newproducts.length > 0 ? (<HomeProductCaro data={newproducts}/>) : (<LoadingComponent/>) }
       
-      <div id="empty"></div>
     </div>
   );
 }

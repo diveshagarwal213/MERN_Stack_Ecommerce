@@ -13,7 +13,8 @@ const UpdateProducts = () => {
         name: "",
         price: "",
         about: "",
-        categories: ""
+        categories: "",
+        flavors:""
     });
     const [fileData, setFileData] = useState(); 
     const [ src, setImg] = useState(placeholder);
@@ -23,10 +24,11 @@ const UpdateProducts = () => {
     const setIdforUpdate = async (id) => {
         let data = await FetchSingleProduct(id);
         if(data){
-            let s = data.categories.join(" ");
-            data = {...data, categories: s}
+            let c = data.categories.join(" ");
+            let f = data.flavors.join(" ");
+            data = {...data, categories: c, flavors: f}
             setsingleProduct(data);
-            setImg(`http://localhost:5000/public/images/${data.image}`);
+            setImg(`http://${window.location.hostname}:5000/public/images/${data.image}`);
         }
     }
 
@@ -54,7 +56,8 @@ const UpdateProducts = () => {
             name: "",
             price: "",
             about: "",
-            categories: ""
+            categories: "",
+            flavors: ""
         })
     };
 
@@ -69,6 +72,7 @@ const UpdateProducts = () => {
         Data.append('name', singleProduct.name);
         Data.append('price', singleProduct.price);
         Data.append('categories', singleProduct.categories);
+        Data.append('flavors', singleProduct.flavors);
         Data.append('about', singleProduct.about);
         Data.append('id', singleProduct._id);
         Data.append('oldimgname',singleProduct.image);
@@ -76,7 +80,7 @@ const UpdateProducts = () => {
         //console.log(Array.from(Data));
 
         try {
-            const result = await axios.post("http://localhost:5000/admin/updateproduct", Data);
+            const result = await axios.post(`http://${window.location.hostname}:5000/admin/updateproduct`, Data);
             //console.log(result);
             toast.success("Product Updated!")
             resetform();
@@ -91,7 +95,7 @@ const UpdateProducts = () => {
 
     const deleteHandler = async() => {
        try {
-        const deleteProduct = await axios.get(`http://localhost:5000/admin/deleteproduct/${singleProduct._id}`);
+        const deleteProduct = await axios.get(`http://${window.location.hostname}:5000/admin/deleteproduct/${singleProduct._id}`);
         console.log(deleteProduct);
         toast.success("Product Deleted")
         resetform();
@@ -116,6 +120,7 @@ const UpdateProducts = () => {
                         <input type="text" onChange={inputHandler} value={singleProduct.name} placeholder="name" name='name' />
                         <input type="number" onChange={inputHandler} value={singleProduct.price} placeholder='price'  name='price' />
                         <input type="text" onChange={inputHandler} placeholder='categories' value={singleProduct.categories} name='categories' />
+                        <input type="text" onChange={inputHandler} placeholder='flavors' value={singleProduct.flavors} name='flavors' />
                         <textarea placeholder='about' onChange={inputHandler} name='about' value={singleProduct.about} />
                         <label htmlFor="fileData"> Browser image </label>
                         <input type="file" id="fileData" onChange={fileChangeHandler} />

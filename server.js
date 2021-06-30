@@ -2,6 +2,7 @@ const express = require('express');
 const creatErr = require('http-errors');
 require('dotenv').config();
 const cors = require('cors');
+const chalk = require('chalk');
 
 //PORT
 const PORT = process.env.PORT || 5000 ;
@@ -14,13 +15,15 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
 //routes
+app.use('/auth', require('./routes/auth.routes'));
 app.use('/public', require('./routes/public.routes'));
 app.use('/admin', require('./routes/admin.routes'));
+app.use('/private', require('./routes/private.routes'));
 
 //404 routes 
 app.use(async (req,res,next) => {
@@ -28,6 +31,7 @@ app.use(async (req,res,next) => {
 });
 //error handler
 app.use((err,req,res,next) => {
+    
     res.status(err.status || 500);
     res.send({
         error:{
@@ -39,5 +43,5 @@ app.use((err,req,res,next) => {
 
 //listen
 app.listen(PORT, () => {
-    console.log(`server_UP ${PORT}`);
+    console.log(chalk.blue.inverse(`server_UP ${PORT}`));
 });

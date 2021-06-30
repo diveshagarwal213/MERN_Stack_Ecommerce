@@ -1,3 +1,4 @@
+@import '../../utils/scss/mixin.scss';
 /*----admin_nav----*/
 #admin_nav{
     display: flex;
@@ -5,6 +6,7 @@
     justify-content: space-evenly;
     background-color: var(--bg-primary);
     width: 100%;
+    margin-bottom: 15px;
     button{
         padding: 12px 15px;
         background: transparent;
@@ -76,30 +78,20 @@
 
         textarea{
             min-height: 100px;
+            background-color: transparent;
         }
 
         label, button {
-            text-transform: capitalize;
+            @include buttonTheme;
             cursor: pointer;
-            padding: 12px 20px;
             border-radius: 10px;
-            box-shadow: var(--box-shadow);
             width: fit-content;
             margin: 8px 0;
-
-            &:hover {
-                box-shadow: var(--hover-box-shadow);
-                color: var(--icons-color);
-            }
+            -webkit-tap-highlight-color: transparent;
         }
 
         button {
             width: 100%;
-            &:hover {
-                box-shadow: var(--hover-box-shadow);
-                background-color: var(--icons-color);
-                color: white;
-            }
         }
     }
 }
@@ -122,17 +114,6 @@
         text-transform: capitalize;
         font-size: x-large;
     }
-
-    #cancel_btn{
-        padding: 8px 15px;
-        width: fit-content;
-        border-radius: 10px;
-
-        &:hover{
-            
-            background-color: rgb(255, 255, 125);
-        }
-    }
 }
 
 #select_update{
@@ -143,22 +124,10 @@
         margin: 10px 10px 20px 0px  ;
         font-size: medium;
         border: none;
-        border-bottom: 3px solid lightgrey;
-        &:focus{
-            border-bottom: 3px solid var(--icons-color);
-        }
+        border: 1px solid #ccc;
     }
     button{
-        padding: 12px 20px;
-        box-shadow: var(--box-shadow);
-        background: transparent;
-        text-transform: capitalize;
-        border-radius: 10px;
-        &:hover{
-            box-shadow: var(--hover-box-shadow);
-            background-color: var(--icons-color);
-            color: white;
-        }
+        @include buttonTheme;
     }
 
     button~button{
@@ -174,15 +143,11 @@
     border-radius: 10px;
     margin: 10px 0px 10px 0px ;
     
-    &:hover{
-        box-shadow: var(--hover-box-shadow);
-    }
-
     button{
         font-size: medium;
         font-weight: 500;
-        &:hover{ 
-            background-color: green !important;
+        &:active{ 
+            color: green !important;
         }
     }
     p{
@@ -218,20 +183,15 @@
     justify-content: space-between;
 
     button{
+        @include buttonTheme;
         padding: 8px 15px;
         width: fit-content;
         border-radius: 10px;
-        box-shadow: var(--box-shadow);
-        background: transparent;
-        &:hover{
-            box-shadow: var(--hover-box-shadow);
-        }
     }
 
     .delete_btn{
-        &:hover{
-            background-color: red;
-            color: white;
+        &:active{
+            color: red;
         }
     }
 }
@@ -250,12 +210,16 @@
 
     }
 
+    #addP_img{
+        min-height: 250px;
+    }
+
     .u_products{
         flex-direction: column;
 
         .u_products_content {
             width: 100%;
-
+            padding: 10px 0px;
         }
         .u_products_img{
             width: 100%;

@@ -1,8 +1,8 @@
 const Product = require('../models/Product.models');
 const {productJoi} = require('../utils/joiSchemas')
 const createErr = require('http-errors');
-const fs = require('fs');
 const path = require('path');
+const {StringToArray, unlinkImage} = require('../utils/Other'); 
 
 
 const addProduct = async (req, res, next) => {
@@ -11,20 +11,14 @@ const addProduct = async (req, res, next) => {
         if(!req.file) throw createErr.BadRequest("no image found"); // uplod file middleware
         
         const newFileName = req.file.filename; 
-        const {name, price, about, categories} = req.body; // [object:null prototype ] {name: "" ,...}
-        
-        //categories string to array
-        let arrCategories = categories.trim();
-        arrCategories = arrCategories.split(" ");
-        if(arrCategories[0] === '' || arrCategories[0] === null){
-            arrCategories = [];
-        }
+        const {name, price, about, categories, flavors} = req.body; // [object:null prototype ] {name: "" ,...}
 
         const productData = {
             name: name,
             price: price,
             about: about,
-            categories: arrCategories,
+            categories: StringToArray(categories),
+            flavors: StringToArray(flavors),
             image: newFileName
         }
         const validProduct = await productJoi.validateAsync(productData);
@@ -34,7 +28,7 @@ const addProduct = async (req, res, next) => {
 
         const product = new Product(validProduct);
         const addProduct = await product.save();
-
+        console.log(addProduct);
         res.send(addProduct);
 
     } catch (error) {
@@ -42,12 +36,7 @@ const addProduct = async (req, res, next) => {
 
         if(req.file){
             let path = `./images/product/${req.file.filename}`
-            fs.unlink(path, (err) => {
-                if (err) {
-                  console.error(err)
-                }
-                //file removed if saved
-            });
+            unlinkImage(path);
         }
 
         next(error);
@@ -56,21 +45,15 @@ const addProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res ,next) => {
     
-    const {name, price, about, categories, id, oldimgname} = req.body; // [object:null prototype ] {name: "" ,...}
+    const {name, price, about, categories, id, oldimgname, flavors} = req.body; // [object:null prototype ] {name: "" ,...}
     try {
-
-        //categories string to array
-        let arrCategories = categories.trim();
-        arrCategories = arrCategories.split(" ");
-        if(arrCategories[0] === '' || arrCategories[0] === null){
-            arrCategories = [];
-        }
 
         let productData = {
             name: name,
             price: price,
             about: about,
-            categories: arrCategories,
+            categories: StringToArray(categories),
+            flavors: StringToArray(flavors),
             image: oldimgname
         }
 
@@ -82,12 +65,7 @@ const updateProduct = async (req, res ,next) => {
 
         if (req.file) { // must be last
             let path = `./images/product/${oldimgname}`;
-            fs.unlink(path, (err) => {
-                if (err) {
-                    console.error(err)
-                }
-                // remove old image 
-            });
+            unlinkImage(path);
         }
 
         res.send("updated");
@@ -97,12 +75,7 @@ const updateProduct = async (req, res ,next) => {
 
         if(req.file){
             let path = `./images/product/${req.file.filename}`
-            fs.unlink(path, (err) => {
-                if (err) {
-                  console.error(err)
-                }
-                //file removed if saved
-            });
+            unlinkImage(path);
         }
         next(error);
     }
@@ -117,11 +90,7 @@ const deleteProduct = async (req,res,next) => {
             const deleteProduct = await Product.deleteOne({_id : id});
             if(deleteProduct){
                 let path = `./images/product/${findProduct.image}`
-                fs.unlink(path, (err) => {
-                    if (err) {
-                    console.error(err)
-                    }
-                });
+                unlinkImage(path);
             }
             res.send("Product Deleted");
         }else{

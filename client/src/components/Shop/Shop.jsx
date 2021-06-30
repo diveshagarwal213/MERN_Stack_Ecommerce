@@ -1,78 +1,93 @@
-import { useEffect, useReducer, useState } from 'react';
+import {  useContext, useState } from 'react';
 import './Shop.scss';
 import ShopProducts from './ShopProducts';
-import { toast } from "react-toastify";
-import axios from "axios";
-import shopProductReducer from "../../reducers/ShopProductReducer";
+//import shopProductReducer from "../../reducers/ShopProductReducer";
+import LoadingComponent from '../../utils/LoadingComponent';
+import FetchProducts from '../../utils/FetchProducts';
+import ShopSideBar from './ShopSideBar';
 
 // custom hooks
 import useDocTitle from "../../hooks/useDocTitle";
 
+//context
+import { CartContext } from '../../App';
 
-const SearchProduct =  () => {
-    const [search , setsearch] = useState('');
 
-    const searchHandler = () => {
-        console.log(search);
-    }
-
-    return(
-        <div id='search_product'>
-            <input type="text" value={search} name='keyword' placeholder='Enter Name or Id' onChange={(e) => setsearch(e.target.value)} />
-            <button onClick={ searchHandler }>search</button>
-            <br />
-        </div>
-    )
-};
-
-const initialState = {
-    loading: true,
-    error:'',
-    productdata:[]
-}
 
 const Shop = () => {
 
     useDocTitle('Shop |');
 
-    const [poductDataState , productDataDispatch ] = useReducer(shopProductReducer,initialState);
+    const ShopContext = useContext(CartContext);
+    const {ShopProductDispatch, ShopProductsState} = ShopContext;
 
-    const fetchdata = async (pageno = 1) => {
-         try {
-            const result = await axios.get(`http://localhost:5000/public/products?page=${pageno}`);
+    const [currentPage, setCurrentPage] = useState(1);
+    //let [hasNext, sethasNext] = useState(true);
+    
+    const loadMore = () => {
+        let Page = currentPage + 1 ;
+        fetchdata(Page,true);
+        setCurrentPage(Page); 
+    }
+
+    const LoadMoreState = (value = false) => {
+        ShopProductDispatch({
+            type: 'HASNEXT',
+            data: value
+        });
+    }
+
+    const fetchdata = async (pageno , Add = false) => {
+        if(!pageno){
+            pageno = 1;
+            setCurrentPage(1);
+        }
+        const result = await FetchProducts(null,3,pageno);
+        if(result){
             const products = result.data.products
             const shopProducts = products.map(row => {return { pid : row._id ,...row}});
-            //console.log(shopProducts);
-            productDataDispatch({
-                type: 'FETCH_UP',
-                data: shopProducts
-            });
             
-        } catch (error) {
-            if (error.response) {
-                toast.error(error.response.data.error.message)
-           }else{
-               toast.error(error.message,{
-                   position: toast.POSITION.TOP_CENTER,
-                   autoClose: false
-               })
-           }
-            productDataDispatch({
-                type: 'FETCH_DOWN',
-            })
-        } 
-        
-    }
-    useEffect(() => {
-        fetchdata();
-    },[]) 
+            if(result.data.next){
+                LoadMoreState(true);
+            }else{
+                LoadMoreState();
+            }
 
+            if(Add){
+                ShopProductDispatch({
+                    type: 'ADD_ON',
+                    data: shopProducts
+                });
+            }else{
+                ShopProductDispatch({
+                    type: 'FETCH_UP',
+                    data: shopProducts
+                });
+            }
+            
+        }else{
+            ShopProductDispatch({
+                type: 'FETCH_DOWN',
+            });
+        } 
+    }
+    
     return(
-        <>
-            <h1>this is Shop  </h1>
-            <SearchProduct/>
-            { poductDataState.loading ? (<h1>loading</h1>) : (<ShopProducts data={poductDataState.productdata}  />) }
-        </>
+        <div id="shop">
+            <h1>Shop</h1>
+            <div id="shop_main" >
+                <div id="main_side">
+                    <ShopSideBar  fetchData ={fetchdata}  />
+                </div>
+                <div id="main_center">
+                    {ShopProductsState.loading ? (
+                        ShopProductsState.error ? (<LoadingComponent message="Somthing went Wrong" />) : (<LoadingComponent />)
+                    ) : (<ShopProducts data={ShopProductsState.productdata} />)}
+
+                    {ShopProductsState.hasNext ? (<button className="load_more_button" onClick={() => loadMore()} >Load More</button>) : (<h3 className="load_more_button">Oops! No More Products</h3>)}
+                </div>
+            </div>
+        </div>
     );
 };
 

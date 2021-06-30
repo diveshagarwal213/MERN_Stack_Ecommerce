@@ -1,0 +1,11 @@
+@mixin buttonTheme {
+    box-shadow: var(--box-shadow);
+    padding: 13px 20px;
+    border-radius: 30px;
+    background-color: transparent;
+    text-transform: capitalize;
+    &:active{
+        box-shadow: var(--box-shadow--inset);
+        color: var(--icons-color);
+    }
+}

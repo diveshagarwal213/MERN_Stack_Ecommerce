@@ -1,0 +1,42 @@
+### register
+POST http://localhost:5000/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"username 3",
+    "email":"example2@gmail.com",
+    "password":"1234"
+}
+
+### LOGIN
+POST http://localhost:5000/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"exapmple2@gmail.com",
+    "password":"43210"
+}
+
+### logout
+GET http://localhost:5000/auth/logout HTTP/1.1
+Authorization: Bearer  
+
+### forget password
+POST http://localhost:5000/auth/forgotpassword HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"exapmple2@gmail.com"
+}
+
+### reset password
+POST http://localhost:5000/auth/resetpassword/93996642eba993c16bd87918faac32a9034828d1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "password":"43210"
+}
+
+### private test
+GET http://localhost:5000/private/privatetest HTTP/1.1
+Authorization: Bearer 

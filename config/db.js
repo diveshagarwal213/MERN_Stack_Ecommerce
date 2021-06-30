@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const chalk = require('chalk');
 
 const DB = process.env.DB_URI;
 
@@ -8,9 +9,9 @@ mongoose.connect(DB, {
     useUnifiedTopology:true,
     useFindAndModify: false
 }).then(() => {
-    console.log("DataBase_Up");
+    console.log(chalk.green.inverse("DataBase_UP"));
 }).catch((err) => {
-    console.log("DataBase_Down : ", err);
+    console.log(err);
 }); 
 
 process.on('SIGINT', async () => {
@@ -18,9 +19,9 @@ process.on('SIGINT', async () => {
     process.exit(0);
 });
 
-mongoose.connection.on('connected',() => {console.log("connection_up");});
+mongoose.connection.on('connected',() => console.log(chalk.yellow.inverse("CONNECTION_UP")));
 
-mongoose.connection.on('error',(err) => {console.log(err.message);});
+mongoose.connection.on('error',(err) => console.log(chalk.red.inverse(`DataBase_Down :  ${err.message}`)));
 
-mongoose.connection.on('disconnected', () => {console.log("DataBase_Connection_closed");});
+mongoose.connection.on('disconnected', () => console.log(chalk.red.inverse("CONNECTION_DOWN")));
 

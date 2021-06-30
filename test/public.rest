@@ -1,8 +1,8 @@
 ### most popular
 GET http://localhost:5000/public/mostpopular?limit=2 HTTP/1.1
 
-### search & fetch products by given name && categories || only categories(?categories=true)  && shorting mostpouplar
-GET http://localhost:5000/public/productname/chocolate cupcake?categories=true&mostpopular=0  HTTP/1.1
+### search by name
+GET http://localhost:5000/public/productname/cake  HTTP/1.1
 
 ### fetch single product by given id  
 GET http://localhost:5000/public/productid/60c73b3cbb9a801d38bf3b04  HTTP/1.1
@@ -12,3 +12,9 @@ GET http://localhost:5000/public/products?page=1&categories=cake&limit=1 HTTP/1.
 
 ### images
 GET http://localhost:5000/public/images/ HTTP/1.1
+
+### /alldistinctcategories
+GET http://localhost:5000/public/alldistinctcategories?fav=t HTTP/1.1
+
+### /search by cat or Fav
+GET http://localhost:5000/public/catandflav?categories=cake&flavors=chocolate HTTP/1.1

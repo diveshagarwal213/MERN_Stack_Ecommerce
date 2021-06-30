@@ -11,12 +11,15 @@ const AddProducts = () => {
         name: "",
         price: "",
         about: "",
-        categories: ""
+        categories: "",
+        flavors:""
     });
 
     const fileChangeHandler = (e) => {
-        setFileData(e.target.files[0]);
-        if(e.target.files[0]) setImg(URL.createObjectURL(e.target.files[0])); //preview image, if imp 
+        if(e.target.files[0]){ //remember => app will crash 'if' not present!
+            setFileData(e.target.files[0]); 
+            setImg(URL.createObjectURL(e.target.files[0]));   
+        }  
     }
 
     const inputHandler = (e) => {
@@ -41,11 +44,12 @@ const AddProducts = () => {
         Data.append('name', productData.name);
         Data.append('price', productData.price);
         Data.append('categories', productData.categories);
+        Data.append('flavors', productData.flavors);
         Data.append('about', productData.about);
         //console.log(Array.from(Data));
         
        try {
-        const result = await axios.post("http://localhost:5000/admin/addproduct", Data);
+        const result = await axios.post(`http://${window.location.hostname}:5000/admin/addproduct`, Data);
         //console.log(result.data);
         toast.success("Product Saved!")
 
@@ -56,7 +60,8 @@ const AddProducts = () => {
             name: "",
             price: "",
             about: "",
-            categories: ""
+            categories: "",
+            flavors: ""
         })
 
        } catch (error) {
@@ -76,18 +81,13 @@ const AddProducts = () => {
                     <form onSubmit={onSubmitHandler} autoComplete='off' >
                         <input type="text" onChange={inputHandler} placeholder='name' value={productData.name} name='name' />
                         <input type="number" onChange={inputHandler} placeholder='price' value={productData.price} name='price' />
-                        <input list="categories" type="text" onChange={inputHandler} placeholder='categories' value={productData.categories} name='categories' />
+                        <input type="text" onChange={inputHandler} placeholder='categories' value={productData.categories} name='categories' />
+                        <input type="text" onChange={inputHandler} placeholder='flavors' value={productData.flavors} name='flavors' />
                         <textarea  onChange={inputHandler} placeholder='about' value={productData.about} name='about' />
                         <label htmlFor="fileData"> Browser image </label>
                         <input type="file" id="fileData" onChange={fileChangeHandler} />
                         <button type='submit' >submit</button>
 
-                        <datalist id="categories">
-                            <option value="cake" />
-                            <option value="chocolate" />
-                            <option value="Vanilla" />
-                            <option value="coconut" />
-                        </datalist>
 
                     </form>
                 </div>
