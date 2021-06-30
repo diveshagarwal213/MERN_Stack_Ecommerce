@@ -14,14 +14,15 @@ const ProductCard = (props) => {
     const cartContext = useContext(CartContext);
     return (
         <div className='item product_card_div'  >
-            <Link to={`product/${product.pid}`}>
-                <div className="productCard_img" style={{ backgroundImage: `url('http://${window.location.hostname}:5000/public/images/${product.image}')` }} ></div>
-            </Link>
+            <div className="productCard_img" style={{ backgroundImage: `url('http://${window.location.hostname}:5000/public/images/${product.image}')` }} >
+                <button>model</button>
+            </div>
             <div className="productCard_content">
                 <h3>{product.name} <span>₹ {product.price}</span></h3>
                 <button onClick={() => cartContext.cartDispatch({ type: 'onAdd', product: product})} >
                     {cartPlusSvg}
                 </button>
+                {/* <Link to={`product/${product.pid}`} >Share</Link> */}
             </div>
         </div>
     )

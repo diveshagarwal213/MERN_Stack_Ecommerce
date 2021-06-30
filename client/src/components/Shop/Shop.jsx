@@ -1,7 +1,7 @@
-import { useEffect, useReducer, useState } from 'react';
+import {  useContext, useState } from 'react';
 import './Shop.scss';
 import ShopProducts from './ShopProducts';
-import shopProductReducer from "../../reducers/ShopProductReducer";
+//import shopProductReducer from "../../reducers/ShopProductReducer";
 import LoadingComponent from '../../utils/LoadingComponent';
 import FetchProducts from '../../utils/FetchProducts';
 import ShopSideBar from './ShopSideBar';
@@ -9,18 +9,18 @@ import ShopSideBar from './ShopSideBar';
 // custom hooks
 import useDocTitle from "../../hooks/useDocTitle";
 
-const initialState = {
-    loading: true,
-    error:'',
-    productdata:[],
-    hasNext:true
-}
+//context
+import { CartContext } from '../../App';
+
+
 
 const Shop = () => {
 
     useDocTitle('Shop |');
 
-    const [productDataState , productDataDispatch ] = useReducer(shopProductReducer,initialState);
+    const ShopContext = useContext(CartContext);
+    const {ShopProductDispatch, ShopProductsState} = ShopContext;
+
     const [currentPage, setCurrentPage] = useState(1);
     //let [hasNext, sethasNext] = useState(true);
     
@@ -31,7 +31,7 @@ const Shop = () => {
     }
 
     const LoadMoreState = (value = false) => {
-        productDataDispatch({
+        ShopProductDispatch({
             type: 'HASNEXT',
             data: value
         });
@@ -54,19 +54,19 @@ const Shop = () => {
             }
 
             if(Add){
-                productDataDispatch({
+                ShopProductDispatch({
                     type: 'ADD_ON',
                     data: shopProducts
                 });
             }else{
-                productDataDispatch({
+                ShopProductDispatch({
                     type: 'FETCH_UP',
                     data: shopProducts
                 });
             }
             
         }else{
-            productDataDispatch({
+            ShopProductDispatch({
                 type: 'FETCH_DOWN',
             });
         } 
@@ -77,14 +77,14 @@ const Shop = () => {
             <h1>Shop</h1>
             <div id="shop_main" >
                 <div id="main_side">
-                    <ShopSideBar productDataDispatch={productDataDispatch} fetchData ={fetchdata} />
+                    <ShopSideBar  fetchData ={fetchdata}  />
                 </div>
                 <div id="main_center">
-                    {productDataState.loading ? (
-                        productDataState.error ? (<LoadingComponent message="Somthing went Wrong" />) : (<LoadingComponent />)
-                    ) : (<ShopProducts data={productDataState.productdata} />)}
+                    {ShopProductsState.loading ? (
+                        ShopProductsState.error ? (<LoadingComponent message="Somthing went Wrong" />) : (<LoadingComponent />)
+                    ) : (<ShopProducts data={ShopProductsState.productdata} />)}
 
-                    {productDataState.hasNext ? (<button className="load_more_button" onClick={() => loadMore()} >Load More</button>) : (<h3 className="load_more_button">Oops! No More Products</h3>)}
+                    {ShopProductsState.hasNext ? (<button className="load_more_button" onClick={() => loadMore()} >Load More</button>) : (<h3 className="load_more_button">Oops! No More Products</h3>)}
                 </div>
             </div>
         </div>

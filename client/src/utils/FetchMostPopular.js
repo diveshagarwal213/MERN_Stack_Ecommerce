@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 import ApiErrorHandler from "./ClientOther";
 
 const FetchMostPopular = async (limit) => {

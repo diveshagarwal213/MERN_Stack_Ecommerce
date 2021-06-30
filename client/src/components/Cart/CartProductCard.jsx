@@ -3,16 +3,7 @@ import { CartContext } from '../../App'
 import {trashSvg} from '../../images/allSvg'
 
 const userData = {
-    name:'abc',
-    id:'exampleid',
-    address: {
-        city:'hanumangarh Town',
-        pincode:'335513',
-        state: 'rajasthan',
-        mobileno:'1234567890',
-        landmark:'op to BSNL OFFICE',
-        type:'home'
-    }
+    userId:'exampleid'
 }
 
 const CartProductCard = (props) => {
@@ -42,20 +33,16 @@ const CartProducts = () => {
     const cartContext = useContext(CartContext)
     const products = cartContext.cartState
 
-    const itemsPrice = products.reduce((a, c) => a + c.price * c.qty, 0);
-    //const taxPrice = itemsPrice * 0.03;
-    const shippingprice = itemsPrice > 300 ? 0 : 30;
-    const totalPrice = itemsPrice + shippingprice;
+    const subtotal = products.reduce((a, c) => a + c.price * c.qty, 0);
+    //const taxPrice = subtotal * 0.03;
+    const shippingprice = subtotal > 300 ? 0 : 30;
+    const totalPrice = subtotal + shippingprice;
 
     const confirmOrder = () => {
-        const order = {
-            ...userData,
-            items: products,
-            itemsprice: itemsPrice,
-            shippingprice: shippingprice,
-            totalprice: totalPrice,
-            payment:false
-        }
+         const order = {
+            userId : userData.userId,
+            items : products.map(x => {return{_id: x._id, qty: x.qty}})
+        } 
         console.log(order);
     }
 
@@ -67,7 +54,7 @@ const CartProducts = () => {
             ))}
             {products.length !== 0 && (
                 <div id='price_details'>
-                    <p>items price : ₹{ itemsPrice.toFixed(2)}</p>
+                    <p>items price : ₹{ subtotal.toFixed(2)}</p>
                     {/* <div>tax price : ₹{ taxPrice.toFixed(2)}</div> */}
                     {shippingprice === 0 ? ( <p> Free Delivery 😇  </p> ) : (<p>shiping price : ₹{ shippingprice.toFixed(2)}</p>)}                    
                     <h3>total : ₹{ totalPrice.toFixed(2)}</h3>

@@ -16,7 +16,8 @@ import UserCart from './components/Cart/UserCart';
 //utils
 
 //reducers
-import reducer from './reducers/CartTtemsReducer'
+import reducer from './reducers/CartTtemsReducer';
+import shopProductReducer from './reducers/ShopProductReducer';
 
 //contexts
 export const CartContext = createContext();
@@ -43,16 +44,29 @@ if (cartstate) {
   }
 }
 
+const shopInitialState = {
+  loading: true,
+  error:'',
+  productdata:[],
+  hasNext:true
+}
+
 
 const App = () => {
 
   //global cart
   const [cartItems, dispatch] = useReducer(reducer, initialState);
+  const [productDataState , productDataDispatch ] = useReducer(shopProductReducer,shopInitialState);
 
   return(
     <>
       <Router>
-        <CartContext.Provider value={{cartState: cartItems, cartDispatch: dispatch}}>
+        <CartContext.Provider value={{
+          cartState: cartItems, 
+          cartDispatch: dispatch,
+          ShopProductsState: productDataState,
+          ShopProductDispatch: productDataDispatch 
+        }}>
           <Nav/>
           <div id="main">
             <Switch>

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 import ApiErrorHandler from "./ClientOther";
 
 const FetchProducts = async (categories = null, limit = null , page = null) => {

@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import SearchProductByName, {SearchByCatAndFlav} from "../../utils/FetchSearchProduct";
 import axios from "axios";
-import { ArrayToString } from "../../utils/ClientOther";
-import ApiErrorHandler from '../../utils/ClientOther';
+import ApiErrorHandler, { ArrayToString } from "../../utils/ClientOther";
+
+import { CartContext } from '../../App';
 
 const ShopSideBar =  (props) => {
 
-    const {productDataDispatch, fetchData} = props;
+    const ShopContext = useContext(CartContext);
+    const {ShopProductDispatch , ShopProductsState} = ShopContext;
+
+    const { fetchData} = props;
 
     const [search , setsearch] = useState('');
     const [catarr, setcatarr] = useState([]);
@@ -36,11 +40,11 @@ const ShopSideBar =  (props) => {
             if(result){
                 const products = result.data.products
                 const shopProducts = products.map(row => {return { pid : row._id ,...row}});
-                productDataDispatch({
+                ShopProductDispatch({
                     type: 'FETCH_UP',
                     data: shopProducts
                 });
-                productDataDispatch({
+                ShopProductDispatch({
                     type: 'HASNEXT',
                     data: false
                 });
@@ -61,11 +65,11 @@ const ShopSideBar =  (props) => {
             if(result){
                 const products = result.data.products
                 const shopProducts = products.map(row => {return { pid : row._id ,...row}});
-                productDataDispatch({
+                ShopProductDispatch({
                     type: 'FETCH_UP',
                     data: shopProducts
                 });
-                productDataDispatch({
+                ShopProductDispatch({
                     type: 'HASNEXT',
                     data: false
                 });
@@ -73,7 +77,7 @@ const ShopSideBar =  (props) => {
                 console.log("empty");
             } */
         }else{
-            fetchData();
+            //fetchData();
         }
         
 
@@ -117,7 +121,11 @@ const ShopSideBar =  (props) => {
     }
 
     useEffect(() => {
-        fetchCategories()
+        fetchCategories();
+        if(!ShopProductsState.productdata.length > 0){
+            console.log("empty");
+            fetchData();
+        }
     },[])
 
     const filterBtn = () => {

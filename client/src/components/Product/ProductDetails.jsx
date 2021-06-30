@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import FetchSingleProduct from '../../utils/FetchSingleProduct';
 import LoadingComponent from '../../utils/LoadingComponent'
-import { useContext } from 'react';
 import {CartContext} from '../../App'
 import { ArrayToString } from '../../utils/ClientOther';
 
@@ -14,9 +14,15 @@ const ProductD = (props) => {
     let date = new Date(createdAt);
 
     const cartContext = useContext(CartContext);
+    const history = useHistory();
+    console.log(history);
+    const goBack = () => {
+        history.goBack();
+    };
 
     return (
         <div id='product_D'>
+            <button onClick={goBack} >back</button>
             <div id="productD_imgDiv" style={{backgroundImage: `url("http://${window.location.hostname}:5000/public/images/${image}")`}} >
             </div>
             <div id='productD_aboutDiv'>
