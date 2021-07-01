@@ -3,6 +3,7 @@ import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { createContext, useReducer } from 'react';
 import { toast } from "react-toastify";
+import ProtectedRoute from './ProtectedRoute';
 
 //components
 import Nav from './components/Nav/Nav';
@@ -12,6 +13,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 import Shop from './components/Shop/Shop';
 import ProductDetails from './components/Product/ProductDetails';
 import UserCart from './components/Cart/UserCart';
+import Auth from './components/Auth/Auth';
 
 //utils
 
@@ -53,7 +55,7 @@ const shopInitialState = {
 
 
 const App = () => {
-
+  
   //global cart
   const [cartItems, dispatch] = useReducer(reducer, initialState);
   const [productDataState , productDataDispatch ] = useReducer(shopProductReducer,shopInitialState);
@@ -71,14 +73,18 @@ const App = () => {
           <div id="main">
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/shop" component={Shop} />
-                <Route exact path="/userprofile" component={UserProfile} />
-                <Route exact path="/usercart" component={UserCart} />
+                <Route path="/shop" component={Shop} />
                 <Route path="/product/:pid" component={ProductDetails} />
                 <Route path="/admin1" component={ Admin } />
+                <Route path="/login" component={ Auth } />
+                
+                <ProtectedRoute path="/usercart" component={UserCart} />
+                <ProtectedRoute path="/userprofile" component={UserProfile} />
+                
                 <Route  component={Error} />
+                
             </Switch>
-          <div className="empty"></div>
+            <div className="empty"></div>
           </div>
         </CartContext.Provider>
       </Router>

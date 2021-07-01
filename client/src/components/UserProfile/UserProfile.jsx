@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useDocTitle from "../../hooks/useDocTitle";
+import { withRouter } from "react-router";
 
 const UserProfile = () => {
     useDocTitle('User |');
@@ -11,4 +12,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default withRouter(UserProfile);

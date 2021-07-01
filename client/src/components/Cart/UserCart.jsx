@@ -1,6 +1,6 @@
 import './Cart.scss'
 import CartProducts from "./CartProductCard";
-
+import { withRouter } from 'react-router';
 
 const UserCart = () => {
     
@@ -11,4 +11,4 @@ const UserCart = () => {
     )
 };
 
-export default UserCart;
+export default withRouter(UserCart);
