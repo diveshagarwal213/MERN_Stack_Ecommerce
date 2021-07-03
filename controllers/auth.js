@@ -4,6 +4,13 @@ const {userJoiSchema, loginSchema} = require('../utils/joiSchemas');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
+const createRootUser =  (userData) => {
+    return {
+        email: userData.email,
+        username: userData.username
+    }
+};
+
 const register = async (req,res,next) => {
     try {
         const result = await userJoiSchema.validateAsync(req.body); //joi
@@ -16,7 +23,8 @@ const register = async (req,res,next) => {
         const accessToken = await saveUser.getAccessToken();
 
         if(!accessToken) throw new createErr.InternalServerError("jwt error");
-        res.send({accessToken});
+        const rootUser = createRootUser(saveUser);
+        res.send({accessToken, rootUser});
     
     } catch (error) {
         if(error.isJoi === true) error.status = 422;
@@ -39,7 +47,9 @@ const login = async (req,res,next) => {
         
         if(!accessToken) throw new createErr.InternalServerError("jwt error");
 
-        res.send({accessToken});
+        const rootUser = createRootUser(user);
+
+        res.send({accessToken, rootUser});
 
    } catch (error) {
         if(error.isJoi === true) error.status = 422;
@@ -53,7 +63,8 @@ const logout = async (req, res, next) => {
         if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")){
             token = req.headers.authorization.split(" ")[1]
         };
-
+        if(!token) throw new createErr.BadRequest("Try again")
+        
         jwt.verify(token, process.env.JWT_KEY , (error,playload)=>{
             if(error) throw new createErr.BadRequest("Token not valid");
             tokenId = playload.jti;

@@ -26,8 +26,7 @@ const Shop = () => {
     
     const loadMore = () => {
         let Page = currentPage + 1 ;
-        fetchdata(Page,true);
-        setCurrentPage(Page); 
+        fetchdata(Page,true); 
     }
 
     const LoadMoreState = (value = false) => {
@@ -37,11 +36,9 @@ const Shop = () => {
         });
     }
 
-    const fetchdata = async (pageno , Add = false) => {
-        if(!pageno){
-            pageno = 1;
-            setCurrentPage(1);
-        }
+    const fetchdata = async (pageno = 1 , Add = false) => {
+        
+        setCurrentPage(pageno);
         const result = await FetchProducts(null,3,pageno);
         if(result){
             const products = result.data.products

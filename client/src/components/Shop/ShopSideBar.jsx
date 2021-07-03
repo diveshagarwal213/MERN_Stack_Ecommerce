@@ -117,7 +117,7 @@ const ShopSideBar =  (props) => {
         setcatarr([]);
         setflavarr([]);
         setsearch("");
-        //fetchData();
+        //fetchData(1);
     }
 
     useEffect(() => {
