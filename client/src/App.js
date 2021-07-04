@@ -20,6 +20,7 @@ import Auth from './components/Auth/Auth';
 //reducers
 import reducer from './reducers/CartTtemsReducer';
 import shopProductReducer from './reducers/ShopProductReducer';
+import AppDataReducer from './reducers/AppDataReducer';
 
 //contexts
 export const CartContext = createContext();
@@ -50,15 +51,23 @@ const shopInitialState = {
   loading: true,
   error:'',
   productdata:[],
-  hasNext:true
+  hasNext:true,
+  nextPage:1
+}
+
+const appDataInitialState = {
+  defaultCategories : [],
+  defaultFlavors : [],
+  newProducts: []
 }
 
 
 const App = () => {
   
-  //global cart
+  //reducers
   const [cartItems, dispatch] = useReducer(reducer, initialState);
   const [productDataState , productDataDispatch ] = useReducer(shopProductReducer,shopInitialState);
+  const [appData, appDataDispatch] = useReducer(AppDataReducer, appDataInitialState);
 
   return(
     <>
@@ -67,7 +76,9 @@ const App = () => {
           cartState: cartItems, 
           cartDispatch: dispatch,
           ShopProductsState: productDataState,
-          ShopProductDispatch: productDataDispatch 
+          ShopProductDispatch: productDataDispatch,
+          appDataState: appData,
+          appDataDispatch: appDataDispatch 
         }}>
           <Nav/>
           <div id="main">

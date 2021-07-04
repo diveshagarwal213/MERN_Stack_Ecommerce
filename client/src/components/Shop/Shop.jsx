@@ -20,45 +20,27 @@ const Shop = () => {
 
     const ShopContext = useContext(CartContext);
     const {ShopProductDispatch, ShopProductsState} = ShopContext;
-
-    const [currentPage, setCurrentPage] = useState(1);
-    //let [hasNext, sethasNext] = useState(true);
     
     const loadMore = () => {
-        let Page = currentPage + 1 ;
+        let Page = ShopProductsState.nextPage ;
         fetchdata(Page,true); 
-    }
-
-    const LoadMoreState = (value = false) => {
-        ShopProductDispatch({
-            type: 'HASNEXT',
-            data: value
-        });
     }
 
     const fetchdata = async (pageno = 1 , Add = false) => {
         
-        setCurrentPage(pageno);
         const result = await FetchProducts(null,3,pageno);
+
         if(result){
-            const products = result.data.products
-            const shopProducts = products.map(row => {return { pid : row._id ,...row}});
-            
-            if(result.data.next){
-                LoadMoreState(true);
-            }else{
-                LoadMoreState();
-            }
 
             if(Add){
                 ShopProductDispatch({
-                    type: 'ADD_ON',
-                    data: shopProducts
+                    type: 'ADD_PRODUCTS',
+                    data: result
                 });
             }else{
                 ShopProductDispatch({
-                    type: 'FETCH_UP',
-                    data: shopProducts
+                    type: 'SET_NEW_PRODUCTS',
+                    data: result
                 });
             }
             

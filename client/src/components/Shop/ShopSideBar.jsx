@@ -9,24 +9,25 @@ import { CartContext } from '../../App';
 const ShopSideBar =  (props) => {
 
     const ShopContext = useContext(CartContext);
-    const {ShopProductDispatch , ShopProductsState} = ShopContext;
-
-    const { fetchData} = props;
+    const {ShopProductDispatch , ShopProductsState, appDataDispatch, appDataState} = ShopContext;
+    const {defaultCategories, defaultFlavors } = appDataState;
+    const { fetchData } = props; //function
 
     const [search , setsearch] = useState('');
     const [catarr, setcatarr] = useState([]);
     const [flavarr, setflavarr] = useState([]);
-    const [defaultCategories, setCategories] = useState([]);
-    const [defaultFlavors, setFlavors] = useState([]);
-
+    
     const fetchCategories = async () => {
         try {
             const result = await axios.get(`http://${window.location.hostname}:5000/public/alldistinctcategories?&fav=true`);
             if(result){
-                let Categories  = result.data.categories
-                let flavors  = result.data.flavors
-                setCategories(Categories);
-                setFlavors(flavors);
+                appDataDispatch({
+                    type : "SET_CAT_AND_FLAV",
+                    data: {
+                        Categories: result.data.categories,
+                        Flavors: result.data.flavors
+                    }
+                })
             }
         } catch (error) {
             ApiErrorHandler(error);
@@ -38,15 +39,9 @@ const ShopSideBar =  (props) => {
         if(search.length >= 3 ){
             const result = await SearchProductByName(search);
             if(result){
-                const products = result.data.products
-                const shopProducts = products.map(row => {return { pid : row._id ,...row}});
                 ShopProductDispatch({
-                    type: 'FETCH_UP',
-                    data: shopProducts
-                });
-                ShopProductDispatch({
-                    type: 'HASNEXT',
-                    data: false
+                    type: 'SET_NEW_PRODUCTS',
+                    data: result
                 });
             }
         }else{
@@ -63,15 +58,9 @@ const ShopSideBar =  (props) => {
         if(cat || flav){
             const result = await SearchByCatAndFlav(cat, flav);
             if(result){
-                const products = result.data.products
-                const shopProducts = products.map(row => {return { pid : row._id ,...row}});
                 ShopProductDispatch({
-                    type: 'FETCH_UP',
-                    data: shopProducts
-                });
-                ShopProductDispatch({
-                    type: 'HASNEXT',
-                    data: false
+                    type: 'SET_NEW_PRODUCTS',
+                    data: result
                 });
             }/* else{
                 console.log("empty");
@@ -117,13 +106,16 @@ const ShopSideBar =  (props) => {
         setcatarr([]);
         setflavarr([]);
         setsearch("");
-        //fetchData(1);
+        fetchData();
     }
 
     useEffect(() => {
-        fetchCategories();
+        if(defaultCategories.length <= 0){
+            //console.log("hi");
+            fetchCategories();
+        } 
         if(!ShopProductsState.productdata.length > 0){
-            console.log("empty");
+            //console.log("empty");
             fetchData();
         }
     },[])
@@ -144,7 +136,7 @@ const ShopSideBar =  (props) => {
                 <button onClick={() => searchHandler(search)}>Search</button>
             </div>
 
-            <button onClick={()=> resetShop() } >clear all</button>
+            <button onClick={()=> resetShop() } >Reset Shop</button>
             <button className="filter_btn" onClick={filterBtn} >Filter</button>
             
             <div id="filter_div">
