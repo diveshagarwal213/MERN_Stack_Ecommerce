@@ -10,11 +10,30 @@ const OrderSchema = new mongoose.Schema({
         default:false 
     },
     orderState:{
-        type:Boolean,
-        default:undefined
+        type:Number,
+        default:null
     },
+    userItems:[],
+    shippingprice: {
+        type:Number,
+    },
+    subtotal : {
+        type:Number,
+        require:true
+    },
+    totalPrice:{
+        type:Number,
+        require: true
+    },
+    selectedDate: {
+        type: Date,
+        require: true
+    }
     
 },
 {
     timestamps:true
 });
+
+const Order = mongoose.model('orders', OrderSchema);
+module.exports = Order ;

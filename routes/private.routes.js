@@ -6,7 +6,7 @@ const { authMiddleware } = require('../middleware/auth.middleware');
 const { placeOrders, privatetest } = require('../controllers/private');
 
 //routes
-router.route('/placeorder').post(placeOrders);
+router.route('/placeorder').post(authMiddleware, placeOrders);
 
 router.route('/privatetest').get(authMiddleware, privatetest);
 

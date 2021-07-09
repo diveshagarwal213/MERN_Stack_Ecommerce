@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from '../../App'
 import {trashSvg} from '../../images/allSvg'
-
-const userData = {
-    userId:'exampleid'
-}
+import DatePicker from 'react-datepicker';
+import PlaceOrdserApi from "../../utils/PlaceOrder";
+/* import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes"; */
 
 const CartProductCard = (props) => {
     const cartContext = useContext(CartContext);
@@ -30,20 +30,29 @@ const CartProductCard = (props) => {
 };
 
 const CartProducts = () => {
-    const cartContext = useContext(CartContext)
-    const products = cartContext.cartState
+    const cartContext = useContext(CartContext);
+    const products = cartContext.cartState;
 
+    //time
+    let nextDay = new Date();
+    nextDay.setDate(nextDay.getDate() + 1);
+    const [selectedDate, setSelectedDate] = useState(nextDay);
+          
+    //price
     const subtotal = products.reduce((a, c) => a + c.price * c.qty, 0);
     //const taxPrice = subtotal * 0.03;
     const shippingprice = subtotal > 300 ? 0 : 30;
     const totalPrice = subtotal + shippingprice;
 
-    const confirmOrder = () => {
+    const confirmOrder = async () => {
          const order = {
-            userId : userData.userId,
-            items : products.map(x => {return{_id: x._id, qty: x.qty}})
+            items : products.map(x => {return{_id: x._id, qty: x.qty}}),
+            selectedDate : selectedDate
         } 
-        console.log(order);
+        const result = await PlaceOrdserApi(order);
+        if(result){
+            //empty cart
+        }
     }
 
     return (
@@ -52,6 +61,16 @@ const CartProducts = () => {
             {products.map(product => (
                 <CartProductCard key={product.pid} product={product} />
             ))}
+            {products.length !== 0 && (
+                <div id='orders_details'>
+                    <DatePicker 
+                        selected={selectedDate}
+                        onChange={date => setSelectedDate(date)}
+                        dateFormat="MMMM d"
+                        minDate={new Date()}
+                    />      
+                </div>
+            )}
             {products.length !== 0 && (
                 <div id='price_details'>
                     <p>items price : ₹{ subtotal.toFixed(2)}</p>

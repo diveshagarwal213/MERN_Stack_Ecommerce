@@ -1,4 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { createContext, useReducer } from 'react';

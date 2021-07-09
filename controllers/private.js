@@ -1,9 +1,10 @@
 const Product = require('../models/Product.models');
 const createErr = require('http-errors');
+const Order = require('../models/Orders.model');
 
 const placeOrders = async (req, res, next) => {
-    const {userId, items} = req.body;
-    
+    const {items, selectedDate} = req.body;
+    const userId = req.rootUser._id;
     let userItems = [], productarr = [];
     let p, xprice;
 
@@ -33,18 +34,20 @@ const placeOrders = async (req, res, next) => {
             userItems,
             subtotal,
             shippingprice,
-            totalPrice
+            totalPrice,
+            selectedDate
         }
-
-        res.send(order);   
+        const finalOrder = new Order(order);
+        const placedOrder = await finalOrder.save();
+        res.send(placedOrder);   
     } catch (error) {
         next(error)
     }
 }
 
 const privatetest = (req,res,next) => {
-    const {username, email} = req.rootUser;  
-    res.send(`hi ${email}`);
+    const {username, email, _id} = req.rootUser;  
+    res.send(_id);
 };
 
 

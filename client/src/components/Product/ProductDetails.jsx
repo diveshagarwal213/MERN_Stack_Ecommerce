@@ -15,14 +15,12 @@ const ProductD = (props) => {
 
     const cartContext = useContext(CartContext);
     const history = useHistory();
-    console.log(history);
     const goBack = () => {
         history.goBack();
     };
 
     return (
         <div id='product_D'>
-            <button onClick={goBack} >back</button>
             <div id="productD_imgDiv" style={{backgroundImage: `url("http://${window.location.hostname}:5000/public/images/${image}")`}} >
             </div>
             <div id='productD_aboutDiv'>
@@ -33,6 +31,7 @@ const ProductD = (props) => {
                 <p>Categories : {ArrayToString(categories)}</p>
                 <p>Flavors : {ArrayToString(flavors)}</p>
                 <p>Created on : {date.toDateString()}</p>
+                <button className="go_back" onClick={goBack} > &larr; </button>
 
             </div>
         </div>

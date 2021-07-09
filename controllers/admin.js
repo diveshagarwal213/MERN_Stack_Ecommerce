@@ -28,7 +28,7 @@ const addProduct = async (req, res, next) => {
 
         const product = new Product(validProduct);
         const addProduct = await product.save();
-        console.log(addProduct);
+        //console.log(addProduct);
         res.send(addProduct);
 
     } catch (error) {
