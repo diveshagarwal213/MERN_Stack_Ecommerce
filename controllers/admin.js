@@ -1,4 +1,6 @@
 const Product = require('../models/Product.models');
+const Order = require('../models/Orders.model');
+const User = require('../models/User.model');
 const {productJoi} = require('../utils/joiSchemas')
 const createErr = require('http-errors');
 const path = require('path');
@@ -101,4 +103,49 @@ const deleteProduct = async (req,res,next) => {
     }
 };
 
-module.exports = { addProduct, updateProduct, deleteProduct };
+//CONFIRM (true) => PENDING => DELIVERY && (PENDING_PAYMENT //if cash payment) => COMPLETE 
+//(flase) REJECT
+const fetchOrders = async (req,res,next) => {    
+    try {
+         
+        const confirmOrders = await Order.find({orderState: "CONFIRM"});
+        const pendingOrders = await Order.find({orderState: "PENDING"});
+        const deliveryOrders = await Order.find({orderState: "DELIVERY"});
+        const completeOrders = await Order.find({orderState: "COMPLETE"}).limit(50);
+        const rejectOrders = await Order.find({orderState: "REJECT"}).limit(50);
+        res.send({
+            confirmOrders,
+            pendingOrders,
+            deliveryOrders,
+            completeOrders,
+            rejectOrders
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const updateOrdersState = async (req,res,next) => {
+    const {orderId, OrderState} = req.body;
+    try {
+        const updatedOrder = await Order.updateOne({_id:orderId},{orderState: OrderState});
+        res.send(updatedOrder);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const FetchSingleUser = async (req,res,next) => {
+    const {id} = req.params
+    try {
+        if(id.match(/^[0-9a-fA-F]{24}$/)){
+            const user = await User.findOne({_id: id});
+            res.send(user);
+        }else{
+            throw  createErr.BadRequest("Not a object id");
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+module.exports = { addProduct, updateProduct, deleteProduct, fetchOrders, updateOrdersState, FetchSingleUser };

@@ -9,9 +9,13 @@ const OrderSchema = new mongoose.Schema({
         type:Boolean,
         default:false 
     },
+    paymentMethod:{
+        type:String,
+        require:true
+    },
     orderState:{
-        type:Number,
-        default:null
+        type:String,
+        default:"CONFIRM"
     },
     userItems:[],
     shippingprice: {

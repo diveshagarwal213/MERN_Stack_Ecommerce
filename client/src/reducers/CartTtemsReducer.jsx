@@ -33,6 +33,8 @@ const reducer = (state, action) => {
         state = state.filter(x => x.pid !== product.pid)
         setlocalstorage(state);
         return state;
+    }else if(action.type === 'EMPTY'){
+        return state = [];
     } else {
         return state
     }

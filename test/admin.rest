@@ -10,5 +10,22 @@ Content-Type: application/json
     "about": ""
 }
 
-###
+### delete Product
 GET http://localhost:5000/admin/deleteproduct/60c998e82f938e20b446082a HTTP/1.1
+
+### fetch orders
+GET http://localhost:5000/admin/fetchorders HTTP/1.1
+Content-Type: application/json
+
+###
+//CONFIRM (true) => PENDING => DELIVERY && (PENDING_PAYMENT //if cash payment) => COMPLETE 
+//(flase) REJECT
+POST http://localhost:5000/admin/updateordersstate HTTP/1.1
+Content-Type: application/json
+
+{
+    "orderId":"60e9a79e54b2b92914cff3f6",
+    "OrderState":"PENDING"
+}
+###
+GET http://localhost:5000/admin/fetchsingleuser/60e026c5874bba245c1fef19 HTTP/1.1

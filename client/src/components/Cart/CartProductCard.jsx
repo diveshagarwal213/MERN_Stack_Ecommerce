@@ -32,6 +32,7 @@ const CartProductCard = (props) => {
 const CartProducts = () => {
     const cartContext = useContext(CartContext);
     const products = cartContext.cartState;
+    const {cartDispatch} = cartContext;
 
     //time
     let nextDay = new Date();
@@ -52,6 +53,7 @@ const CartProducts = () => {
         const result = await PlaceOrdserApi(order);
         if(result){
             //empty cart
+            cartDispatch({type: 'EMPTY'});
         }
     }
 

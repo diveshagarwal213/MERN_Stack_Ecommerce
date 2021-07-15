@@ -1,7 +1,8 @@
 import  "./admin.scss";
+import { useState } from "react";
 import AddProducts from "./AddProducts";
 import UpdateProducts from "./UpdateProducts/UpdateProducts";
-import { useState } from "react";
+import Orders from "./Orders/Orders";
 
 const Admin =  () => {
     const [adminNav, setadminNav] = useState("ORDERS");
@@ -18,8 +19,7 @@ const Admin =  () => {
                 <button className="btn" onClick={() => {adminNavHandler("ADMIN_PROFILE")}} >Profile</button>
             </div>
 
-            
-            {adminNav === "ORDERS" ? ("this is orders") : ("")}
+            {adminNav === "ORDERS" ? (<Orders/>) : ("")}
             {adminNav === "ADD_PRODUCTS" ? (<AddProducts/>) : ("")}
             {adminNav === "UPDATE_PRODUCTS" ? (<UpdateProducts/>) : ("")}
             {adminNav === "ADMIN_PROFILE" ? ("this is ADMIN_PROFILE") : ("")}

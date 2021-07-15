@@ -35,7 +35,8 @@ const placeOrders = async (req, res, next) => {
             subtotal,
             shippingprice,
             totalPrice,
-            selectedDate
+            selectedDate,
+            paymentMethod:"CASH" //solid
         }
         const finalOrder = new Order(order);
         const placedOrder = await finalOrder.save();
@@ -45,6 +46,16 @@ const placeOrders = async (req, res, next) => {
     }
 }
 
+const FetchUsersOrders = async (req,res,next) => {
+    const userId = req.rootUser._id;
+    try {
+        const userOrders = await Order.find({userId: userId});
+        res.send({userOrders});
+    } catch (error) {
+        next(error)
+    }
+};
+
 const privatetest = (req,res,next) => {
     const {username, email, _id} = req.rootUser;  
     res.send(_id);
@@ -52,4 +63,4 @@ const privatetest = (req,res,next) => {
 
 
 
-module.exports = {placeOrders, privatetest };
+module.exports = {placeOrders, FetchUsersOrders, privatetest };

@@ -1,8 +1,8 @@
 POST http://localhost:5000/private/placeorder HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNTgxMjE1MywiZXhwIjoxNjI4NDA0MTUzLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTgxMjE1MzkzOC0yMTcxNjhlZDEyY2RiNGExZWQzZWI5MjMifQ.BTLHdTntlwL8VRzaJzjeVl7Vw6v2DUOCsWavjXn8uXc
 Content-Type: application/json
 
 {
-    "userId": "example id",
     "items": [
         {
             "_id": "60c34ee5b4a84026f89d3878",
@@ -15,6 +15,10 @@ Content-Type: application/json
     ]
 }
 
+### fetch userorders
+GET http://localhost:5000/private/fetchuserorders HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNTgxMjE1MywiZXhwIjoxNjI4NDA0MTUzLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTgxMjE1MzkzOC0yMTcxNjhlZDEyY2RiNGExZWQzZWI5MjMifQ.BTLHdTntlwL8VRzaJzjeVl7Vw6v2DUOCsWavjXn8uXc
+
 ### private test
 GET http://localhost:5000/private/privatetest HTTP/1.1
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNTgxMjE1MywiZXhwIjoxNjI4NDA0MTUzLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTgxMjE1MzkzOC0yMTcxNjhlZDEyY2RiNGExZWQzZWI5MjMifQ.BTLHdTntlwL8VRzaJzjeVl7Vw6v2DUOCsWavjXn8uXc

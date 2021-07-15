@@ -19,7 +19,7 @@ Content-Type: application/json
 
 ### logout
 GET http://localhost:5000/auth/logout HTTP/1.1
-Authorization: Bearer  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZGFkZjk5OTRkMjg3MDg3MDAxMGYwZiIsImlhdCI6MTYyNTA2MTk3NywiZXhwIjoxNjI3NjUzOTc3LCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTA2MTk3Nzg3NC02ZWNjMmZhYWI4Njk3YjdhYjFiM2QxMDIifQ.TnbYqEwMXrh7W487-6diiIgpc_yFzN-eAKCVESPMCLw 
 
 ### forget password
 POST http://localhost:5000/auth/forgotpassword HTTP/1.1
@@ -39,4 +39,4 @@ Content-Type: application/json
 
 ### private test
 GET http://localhost:5000/private/privatetest HTTP/1.1
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZGFkZjk5OTRkMjg3MDg3MDAxMGYwZiIsImlhdCI6MTYyNTA2MTk3NywiZXhwIjoxNjI3NjUzOTc3LCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTA2MTk3Nzg3NC02ZWNjMmZhYWI4Njk3YjdhYjFiM2QxMDIifQ.TnbYqEwMXrh7W487-6diiIgpc_yFzN-eAKCVESPMCLw
