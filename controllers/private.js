@@ -1,6 +1,8 @@
 const Product = require('../models/Product.models');
 const createErr = require('http-errors');
 const Order = require('../models/Orders.model');
+const User = require('../models/User.model');
+const {AddressSchema} = require('../utils/joiSchemas');
 
 const placeOrders = async (req, res, next) => {
     const {items, selectedDate} = req.body;
@@ -56,11 +58,24 @@ const FetchUsersOrders = async (req,res,next) => {
     }
 };
 
+const AddUserAddress = async (req,res,next)=>{
+    const  { address } = req.body;
+    const userId = req.rootUser._id;
+     try {
+        const validAddress = await AddressSchema.validateAsync(address); 
+        const result = await User.updateOne({_id:userId},{$set: {address: validAddress}});
+        res.send(result);
+    } catch (error) {
+        if(error.isJoi === true) error.status = 422;
+        next(error);
+    }
+}
+
 const privatetest = (req,res,next) => {
     const {username, email, _id} = req.rootUser;  
-    res.send(_id);
+    res.send(req.rootUser);
 };
 
 
 
-module.exports = {placeOrders, FetchUsersOrders, privatetest };
+module.exports = {placeOrders, FetchUsersOrders, privatetest, AddUserAddress };

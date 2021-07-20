@@ -12,13 +12,25 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         require: [true, "please provid a email"],
-        unique:true
     },
     password:{
         type: String,
         require: [true, "please add a password"],
         minlength: 4,
         select: false 
+    },
+    address:{
+        street: String,
+        city:String,
+        state:{
+            type:String,
+            uppercase:true,
+        },
+        zip:Number,
+        mobNumber:Number
+    },
+    mobileNumber:{
+        type:Number
     },
     tokens: [
         {

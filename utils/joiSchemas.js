@@ -20,4 +20,13 @@ const loginSchema = Joi.object({
     password: Joi.string().min(4).required(),
 });
 
-module.exports = { productJoi, userJoiSchema, loginSchema }
+const AddressSchema = Joi.object({
+    street: Joi.string().required(),
+    city: Joi.string().required(),
+    state: Joi.string().uppercase().required(),
+    zip: Joi.number().min(4).required(),
+    mobNumber: Joi.number().min(10).required()
+
+})
+
+module.exports = { productJoi, userJoiSchema, loginSchema, AddressSchema }

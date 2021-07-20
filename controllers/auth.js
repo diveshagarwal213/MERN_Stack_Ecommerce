@@ -7,7 +7,8 @@ const crypto = require('crypto');
 const createRootUser =  (userData) => {
     return {
         email: userData.email,
-        username: userData.username
+        username: userData.username,
+        address: userData.address
     }
 };
 
