@@ -25,6 +25,6 @@ yarn-error.log*
 
 #
 .env
-/images
+
 playGround.js
 .vscode
