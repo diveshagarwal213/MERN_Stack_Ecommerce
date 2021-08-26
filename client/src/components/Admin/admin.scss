@@ -196,6 +196,117 @@
     }
 }
 
+/*----Orders----*/
+#update_orders{
+    //border: 1px solid purple;
+    padding: 1%;
+    h1{
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 300;
+    }
+    >div{
+        //border: 1px solid green;
+        box-shadow: var(--box-shadow);
+    }    
+}
+#update_order_card{
+    >div{
+        //border: 1px solid orange;
+        padding: 1%;
+        
+    }
+    h3{
+        margin: 3px;
+    }
+    p{
+        margin: 3px 0 0 0;
+
+    }
+    button{
+        @include buttonTheme;
+        margin-left: 10px;
+        font-size: medium;
+        font-weight: 600;
+        text-transform: capitalize;
+        &:focus{
+            color: var(--text-light);
+        }
+    }
+    .red{
+        color: red;
+        &:focus{
+            color: red;
+        }
+    }
+    .green{
+        color: green;
+        &:focus{
+            color: green;
+        }
+    }
+    .purple{
+        color: purple;
+        &:focus{
+            color: purple;
+        }
+    }
+    .blue{
+        color: blue;
+        &:focus{
+            color: blue;
+        }
+    }
+}
+.order_item_card{
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1%;
+    .item_img_div{
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+    }
+}
+
+#select_order_div{
+    //border: 1px solid green;
+    padding: 1%;
+    >div{
+        h2{
+            text-transform: capitalize;
+        }
+    }
+    >button{
+        @include buttonTheme;
+    }
+
+    .order_card{
+        border: 1px solid lightgray;
+        padding: 3px;
+        margin-top: 3px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: medium;
+        button{
+            @include buttonTheme;
+            padding: 10px;
+            box-shadow: none;
+            font-size: medium;
+            font-weight: bold;
+            color: var(--icons-color);
+        }
+        p{
+            //border: 1px solid red;
+            margin: 0;
+            width: 150px;
+        }
+    }
+}
+/*----Orders----*/
+
 @media only screen and (max-width: 600px){
     #admin_nav{
         flex-wrap: wrap;
@@ -225,5 +336,13 @@
             width: 100%;
             height: 200px;
         }
-    }    
+    }
+    #select_order_div{
+        .order_card{
+            p{
+                width: fit-content;
+            }
+        }
+    }
+    
 }

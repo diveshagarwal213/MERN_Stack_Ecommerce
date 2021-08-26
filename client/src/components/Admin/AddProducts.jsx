@@ -49,7 +49,7 @@ const AddProducts = () => {
         //console.log(Array.from(Data));
         
        try {
-        const result = await axios.post(`http://${window.location.hostname}:5000/admin/addproduct`, Data);
+        const result = await axios.post(`/admin/addproduct`, Data);
         //console.log(result.data);
         toast.success("Product Saved!")
 

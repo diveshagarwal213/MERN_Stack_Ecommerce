@@ -53,7 +53,6 @@ const Shop = () => {
     
     return(
         <div id="shop">
-            <h1>Shop</h1>
             <div id="shop_main" >
                 <div id="main_side">
                     <ShopSideBar  fetchData ={fetchdata}  />

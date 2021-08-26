@@ -10,7 +10,7 @@ const PlaceOrdserApi = async (order) => {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         };
-        const result = await axios.post(`http://${window.location.hostname}:5000/private/placeorder`,order,config);
+        const result = await axios.post(`/private/placeorder`,order,config);
         //console.log(result);
         toast.success("order placed");
         return result;

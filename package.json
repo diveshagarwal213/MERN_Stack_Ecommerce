@@ -7,7 +7,8 @@
     "server": "nodemon server.js",
     "client": "cd client && npm start",
     "dev": "concurrently -n 'server,client' -c 'white,blue' \"nodemon server.js\" \"npm run client\"",
-    "playground": "cd test && node playGround.js"
+    "playground": "cd test && node playGround.js",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",

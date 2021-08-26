@@ -8,29 +8,29 @@ const FetchProducts = async (categories = null, limit = null , page = null) => {
         if (page) {
             if(limit){
                 if(categories){
-                    result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${page}&categories=${categories}&limit=${limit}`);
+                    result = await axios.get(`/public/products?page=${page}&categories=${categories}&limit=${limit}`);
                 }else{
-                    result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${page}&limit=${limit}`);
+                    result = await axios.get(`/public/products?page=${page}&limit=${limit}`);
                 }
             
             }else{
                 if(categories){
-                    result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${page}&categories=${categories}`)
+                    result = await axios.get(`/public/products?page=${page}&categories=${categories}`)
                 }else{
-                    result = await axios.get(`http://${window.location.hostname}:5000/public/products?page=${page}`); //default limit
+                    result = await axios.get(`/public/products?page=${page}`); //default limit
                 }
             }
         } else if(limit){
             if(categories){
-                result = await axios.get(`http://${window.location.hostname}:5000/public/products?limit=${limit}&categories=${categories}`)
+                result = await axios.get(`/public/products?limit=${limit}&categories=${categories}`)
             }else{
-                result = await axios.get(`http://${window.location.hostname}:5000/public/products?limit=${limit}`); 
+                result = await axios.get(`/public/products?limit=${limit}`); 
             }
         }else{
             if(categories){
-                result = await axios.get(`http://${window.location.hostname}:5000/public/products?categories=${categories}`)
+                result = await axios.get(`/public/products?categories=${categories}`)
             }else{
-                result = await axios.get(`http://${window.location.hostname}:5000/public/products`); 
+                result = await axios.get(`/public/products`); 
             }
         }
         

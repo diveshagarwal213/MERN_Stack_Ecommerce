@@ -5,13 +5,17 @@ const FetchMostPopular = async (limit) => {
     try {
         let result;
         if(limit){
-            result = await axios.get(`http://${window.location.hostname}:5000/public/mostpopular?limit=${limit}`);
+            result = await axios.get(`/public/mostpopular?limit=${limit}`);
+
         }else{
-            result = await axios.get(`http://${window.location.hostname}:5000/public/mostpopular`);
+            result = await axios.get(`/public/mostpopular`);
         }
+        console.log(result);
         return result;
     } catch (error) {
         ApiErrorHandler(error);
+        //console.log(error);
+        //return null;
     }
 }
 

@@ -23,7 +23,7 @@ const SignUp =  () => {
             if(cpassword !== password) {
                return ApiErrorHandler("password not match",true);
             }else{
-                const requestToken = await axios.post(`http://${window.location.hostname}:5000/auth/register`, Userdata, config);
+                const requestToken = await axios.post(`/auth/register`, Userdata, config);
                 if(requestToken.data.accessToken){
                     localStorage.setItem("accessToken", requestToken.data.accessToken); 
                     localStorage.setItem("isLogin", true); 

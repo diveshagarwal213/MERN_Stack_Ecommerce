@@ -27,5 +27,5 @@ Content-Type: application/json
     "orderId":"60e9a79e54b2b92914cff3f6",
     "OrderState":"PENDING"
 }
-###
-GET http://localhost:5000/admin/fetchsingleuser/60e026c5874bba245c1fef19 HTTP/1.1
+### fetch single user
+GET http://localhost:5000/admin/fetchsingleuser/60e7ecb960ecb10fccde340e HTTP/1.1

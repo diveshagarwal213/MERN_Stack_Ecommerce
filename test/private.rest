@@ -17,8 +17,23 @@ Content-Type: application/json
 
 ### fetch userorders
 GET http://localhost:5000/private/fetchuserorders HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNTgxMjE1MywiZXhwIjoxNjI4NDA0MTUzLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTgxMjE1MzkzOC0yMTcxNjhlZDEyY2RiNGExZWQzZWI5MjMifQ.BTLHdTntlwL8VRzaJzjeVl7Vw6v2DUOCsWavjXn8uXc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNjc2OTk0MSwiZXhwIjoxNjI5MzYxOTQxLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNjc2OTk0MTE3Mi0yYjdlOTY5NjA3N2UzYzI1MTk5YmJjYTgifQ.czouULrDYjzLTOQOGGPEqRpTLjky5-484tZyUsX6auo
 
 ### private test
 GET http://localhost:5000/private/privatetest HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNjc2Nzk4MywiZXhwIjoxNjI5MzU5OTgzLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNjc2Nzk4MzE2NC1kOTA3YTk4NWMyNDYwNjVjZTZhNGFhNjkifQ.TPO-yQfpvFs9Mm-yNlw-Poxdp0DzXIbeGWq7h9DyH2Q
+
+### add user address or update
+POST http://localhost:5000/private/adduseraddress HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYyNTgxMjE1MywiZXhwIjoxNjI4NDA0MTUzLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYyNTgxMjE1MzkzOC0yMTcxNjhlZDEyY2RiNGExZWQzZWI5MjMifQ.BTLHdTntlwL8VRzaJzjeVl7Vw6v2DUOCsWavjXn8uXc
+Content-Type: application/json
+
+{
+    "address":{
+        "street": "String",
+        "city":"String",
+        "state":"Rajasthan",
+        "zip":335513,
+        "mobNumber":1234567890
+    }
+}

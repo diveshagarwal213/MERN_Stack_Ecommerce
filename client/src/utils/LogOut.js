@@ -10,7 +10,7 @@ const LogOut = async () => {
         }
     };
     try {
-        const result = await axios.get(`http://${window.location.hostname}:5000/auth/logout`, config);
+        const result = await axios.get(`/auth/logout`, config);
         
     } catch (error) {
         ApiErrorHandler(error);

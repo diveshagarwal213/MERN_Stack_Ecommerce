@@ -19,7 +19,7 @@ const ShopSideBar =  (props) => {
     
     const fetchCategories = async () => {
         try {
-            const result = await axios.get(`http://${window.location.hostname}:5000/public/alldistinctcategories?&fav=true`);
+            const result = await axios.get(`/public/alldistinctcategories?&fav=true`);
             if(result){
                 appDataDispatch({
                     type : "SET_CAT_AND_FLAV",

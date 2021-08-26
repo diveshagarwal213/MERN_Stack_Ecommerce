@@ -15,7 +15,7 @@ const ProductCard = (props) => {
     return (
         <div className='item product_card_div'  >
             <Link to={`product/${product.pid}`}>
-                <div className="productCard_img" style={{ backgroundImage: `url('http://${window.location.hostname}:5000/public/images/${product.image}')` }} ></div>
+                <div className="productCard_img" style={{ backgroundImage: `url('/public/images/${product.image}')` }} ></div>
             </Link>
             <div className="productCard_content">
                 <h3>{product.name} <span>₹ {product.price}</span></h3>

@@ -10,7 +10,7 @@ const FetchUsersOrders = async () => {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         } 
-        const result = await axios.get(`http://${window.location.hostname}:5000/private/fetchuserorders`,config);
+        const result = await axios.get(`/private/fetchuserorders`,config);
         if(result.data.userOrders){
             return result.data.userOrders;
         }else{
@@ -37,7 +37,9 @@ const UsersOrders = () => {
     return (
         <div>
             this is UsersOrders
-            {orderList.map(x=> x.orderState)}
+            <div>
+            {orderList.map(x => <p key={x._id} >{x.orderState}</p>)}
+            </div>
         </div>
     );
 };

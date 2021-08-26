@@ -12,7 +12,7 @@ const Login =  () => {
         e.preventDefault();
         const loginDetails ={email, password};
         try {
-            const requestToken = await axios.post(`http://${window.location.hostname}:5000/auth/login`,loginDetails);
+            const requestToken = await axios.post(`/auth/login`,loginDetails);
             if(requestToken.data.accessToken){
                 localStorage.setItem("accessToken", requestToken.data.accessToken); 
                 localStorage.setItem("isLogin", true);

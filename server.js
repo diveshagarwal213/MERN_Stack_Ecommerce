@@ -3,6 +3,7 @@ const creatErr = require('http-errors');
 require('dotenv').config();
 const cors = require('cors');
 const chalk = require('chalk');
+const path = require('path');
 
 //PORT
 const PORT = process.env.PORT || 5000 ;
@@ -18,6 +19,19 @@ app.use(cors({
     origin: '*',
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
+
+//production
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname,"/client/build")));
+
+    app.get("/", (req,res) => {
+        res.sendFile(path.join(__dirname,'client','build', 'index.html'));
+    });
+}else{
+    app.get('/',(req,res)=>{
+        res.send("Api Running")
+    });
+}
 
 //routes
 app.use('/auth', require('./routes/auth.routes'));
@@ -40,6 +54,8 @@ app.use((err,req,res,next) => {
         },
     });
 });
+
+
 
 //listen
 app.listen(PORT, () => {

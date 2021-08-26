@@ -48,7 +48,7 @@ const AddressCard = () => {
         };
 
         try {
-            const result = await axios.post(`http://${window.location.hostname}:5000/private/adduseraddress`,{address},config);
+            const result = await axios.post(`/private/adduseraddress`,{address},config);
             toast.success("Address Updated");
             setAddressState(true);
             const userdata = rootUserData(true);
