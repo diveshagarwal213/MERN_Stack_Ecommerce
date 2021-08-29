@@ -51,7 +51,7 @@ const placeOrders = async (req, res, next) => {
 const FetchUsersOrders = async (req,res,next) => {
     const userId = req.rootUser._id;
     try {
-        const userOrders = await Order.find({userId: userId});
+        const userOrders = await Order.find({userId: userId}).sort({createdAt: -1});
         res.send({userOrders});
     } catch (error) {
         next(error)

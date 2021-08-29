@@ -22,7 +22,7 @@ const Admin =  () => {
             {adminNav === "ORDERS" ? (<Orders/>) : ("")}
             {adminNav === "ADD_PRODUCTS" ? (<AddProducts/>) : ("")}
             {adminNav === "UPDATE_PRODUCTS" ? (<UpdateProducts/>) : ("")}
-            {adminNav === "ADMIN_PROFILE" ? ("this is ADMIN_PROFILE") : ("")}
+            {adminNav === "ADMIN_PROFILE" ? ("ADMIN_PROFILE (wip)") : ("")}
             
             
         </div>

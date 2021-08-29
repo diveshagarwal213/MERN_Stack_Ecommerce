@@ -1,5 +1,7 @@
 # MERN_Stack_Ecommerce (wip)
 A E-commerce project based on  MERN Stack (wip)
+[View Demo](https://peaceful-coast-33341.herokuapp.com) at Heroku.
+
 
 #### _**IMPORTANT NOTE**_ - 
 This project does not have a ENV setup. Setup the env file based on the environments below.

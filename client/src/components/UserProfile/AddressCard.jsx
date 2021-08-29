@@ -60,21 +60,39 @@ const AddressCard = () => {
 
     };
     return(
-        <div>
+        <div id="user_address">
+            <h2>Manage Address</h2>
             <form onSubmit={addressHandler}>
-                <input type="text" disabled={addressState} onChange={inputHandler} name="street" value={address.street} placeholder="Street" />
-                <input type="text" disabled={addressState} onChange={inputHandler} name="city" value={address.city} placeholder="City" />
-                <input type="text" disabled={addressState} onChange={inputHandler} name="state" value={address.state} placeholder="State" />
-                <input type="number" disabled={addressState} onChange={inputHandler} name="zip" value={address.zip} placeholder="Zip code" />
-                <input type="number" disabled={addressState} onChange={inputHandler} name="mobNumber" value={address.mobNumber} placeholder="Mobile Number" />
-                {
-                    addressState ? (<button type="button" onClick={()=> setAddressState(false)} >Edit</button>) : (
-                        <>
-                            <button type="button" onClick={()=> setAddressState(true)} >cancel</button>
-                            <button type="submit" >Save</button>
-                        </>
-                    )
-                }
+                <div>
+                    <text>Street Address</text>
+                    <input type="text" disabled={addressState} onChange={inputHandler} name="street" value={address.street} placeholder="Street" /> 
+                </div>
+                <div>
+                    <text>City</text>
+                    <input type="text" disabled={addressState} onChange={inputHandler} name="city" value={address.city} placeholder="City" /> 
+                </div>
+                <div>
+                    <text>State</text>
+                    <input type="text" disabled={addressState} onChange={inputHandler} name="state" value={address.state} placeholder="State" /> 
+                </div>
+                <div>
+                    <text>Zip code</text>
+                    <input type="number" disabled={addressState} onChange={inputHandler} name="zip" value={address.zip} placeholder="Zip code" /> 
+                </div>
+                <div>
+                    <text>Mobile Number</text>
+                    <input type="number" disabled={addressState} onChange={inputHandler} name="mobNumber" value={address.mobNumber} placeholder="Mobile Number" /> 
+                </div>
+                <div>
+                    {
+                        addressState ? (<button type="button" onClick={()=> setAddressState(false)} >Edit</button>) : (
+                            <>
+                                <button type="button" onClick={()=> setAddressState(true)} >cancel</button>
+                                <button type="submit" >Save</button>
+                            </>
+                        )
+                    }
+                </div>
                 
             </form>
             

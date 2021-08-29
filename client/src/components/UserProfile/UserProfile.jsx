@@ -1,3 +1,4 @@
+import './user.scss';
 import { Link, useHistory } from "react-router-dom";
 import useDocTitle from "../../hooks/useDocTitle";
 import { withRouter } from "react-router";
@@ -20,9 +21,11 @@ const UserProfile = () => {
 
     return(
         <div id="user_profile">
-            <h1>{user.email}</h1>
-            <Link to='admin1'>admin</Link>
-            <button onClick={logoutHandler} >Logout</button>
+            <div id="user_heading">
+                <h2>{user.username}</h2>
+                <p>{user.email}</p>
+                <button onClick={logoutHandler} >Logout</button>
+            </div>
             <AddressCard/>
             <UsersOrders/>
         </div>

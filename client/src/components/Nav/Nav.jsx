@@ -1,6 +1,6 @@
 //import './Nav.css'
 import './nav.scss'
-import { navSvg , homeSvg, shopSvg, userProfileSvg, basketSvg } from './NavSvgs'
+import { navSvg , homeSvg, shopSvg, userProfileSvg, basketSvg, adminSvg } from './NavSvgs'
 import { Link ,NavLink } from 'react-router-dom';
 import NavItem from './NavItem'
 import { useContext } from 'react';
@@ -37,6 +37,7 @@ const Nav = () => {
             </NavLink>
           </li>
           
+          <NavItem linkText="Admin" linkAddress="/admin1" iconSvg={adminSvg}/>
           <NavItem linkText="User" linkAddress="/userprofile" iconSvg={userProfileSvg}/>
 
           

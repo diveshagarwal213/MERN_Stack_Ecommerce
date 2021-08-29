@@ -99,10 +99,21 @@
 }
 
 /*----order details----*/
+
 #orders_details{
+    //border: 1px solid red;
+    font-size: large;
+    margin: 20px 0px;
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    border-radius: 7px;
     input{
-        border: 1px solid grey;
-        
+       // border: 1px solid green;
+        margin-left: 10px;
+        font-size: inherit;
+        cursor: pointer;
+        text-align: center;
+        color: var(--icons-color);
     }
 }
 
@@ -116,15 +127,15 @@
     border-radius: 10px;
     min-height: 100px;
     text-transform: capitalize;
-    font-weight: 500;
+    font-size: large;
 
-    h3{
+    span{
         color: var(--icons-color);
     }
 
     button{
         @include buttonTheme;
-        font-size: medium;      
+        font-size: large;      
     }
 }
 

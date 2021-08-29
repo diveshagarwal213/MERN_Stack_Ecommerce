@@ -10,7 +10,6 @@ const FetchMostPopular = async (limit) => {
         }else{
             result = await axios.get(`/public/mostpopular`);
         }
-        console.log(result);
         return result;
     } catch (error) {
         ApiErrorHandler(error);

@@ -5,16 +5,12 @@ const ApiErrorHandler = (error, warning = false) => {
         toast.warning(error);
         return null
     }
-    /* if(error.response.data.error){
-        console.log(error);
-        if(error.response.data.error.status < 500 ){
-            toast.error(error.response.data.error.message)
-        }else{
-            toast.error("Server Error")
-        }
-    }else{ */
+    
+    if(error.response.data.error){
+        toast.error(error.response.data.error.message)
+    }else{
         toast.error(error.message)
-    //}
+    }
     return null;
 }
 

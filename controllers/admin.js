@@ -111,8 +111,8 @@ const fetchOrders = async (req,res,next) => {
         const confirmOrders = await Order.find({orderState: "CONFIRM"});
         const pendingOrders = await Order.find({orderState: "PENDING"});
         const deliveryOrders = await Order.find({orderState: "DELIVERY"});
-        const completeOrders = await Order.find({orderState: "COMPLETE"}).limit(50);
-        const rejectOrders = await Order.find({orderState: "REJECT"}).limit(50);
+        const completeOrders = await Order.find({orderState: "COMPLETE"}).limit(50).sort({createdAt: -1});
+        const rejectOrders = await Order.find({orderState: "REJECT"}).limit(50).sort({createdAt: -1});
         res.send({
             confirmOrders,
             pendingOrders,

@@ -34,9 +34,10 @@ const CartProducts = () => {
     const products = cartContext.cartState;
     const {cartDispatch} = cartContext;
 
-    //time
+    //min selected Date
+    // TODO => add admin config settings
     let nextDay = new Date();
-    nextDay.setDate(nextDay.getDate() + 1);
+    nextDay.setDate(nextDay.getDate() + 2);
     const [selectedDate, setSelectedDate] = useState(nextDay);
           
     //price
@@ -49,7 +50,7 @@ const CartProducts = () => {
          const order = {
             items : products.map(x => {return{_id: x._id, qty: x.qty}}),
             selectedDate : selectedDate
-        } 
+        }
         const result = await PlaceOrdserApi(order);
         if(result){
             //empty cart
@@ -59,17 +60,18 @@ const CartProducts = () => {
 
     return (
         <div id='cart_products'>
-            {products.length === 0 && <div id='empty_cart'>Idiot add somthing first!!😤</div>}
+            {products.length === 0 && <div id='empty_cart'>Cart is Empty!</div>}
             {products.map(product => (
                 <CartProductCard key={product.pid} product={product} />
             ))}
             {products.length !== 0 && (
                 <div id='orders_details'>
+                    <span>Delivery Date</span> 
                     <DatePicker 
                         selected={selectedDate}
                         onChange={date => setSelectedDate(date)}
-                        dateFormat="MMMM d"
-                        minDate={new Date()}
+                        dateFormat="d MMMM"
+                        minDate={nextDay}
                     />      
                 </div>
             )}
@@ -78,7 +80,7 @@ const CartProducts = () => {
                     <p>items price : ₹{ subtotal.toFixed(2)}</p>
                     {/* <div>tax price : ₹{ taxPrice.toFixed(2)}</div> */}
                     {shippingprice === 0 ? ( <p> Free Delivery 😇  </p> ) : (<p>shiping price : ₹{ shippingprice.toFixed(2)}</p>)}                    
-                    <h3>total : ₹{ totalPrice.toFixed(2)}</h3>
+                    <span>total : ₹{ totalPrice.toFixed(2)}</span>
                     <div>
                         <button onClick={confirmOrder} >Confirm Oder</button>
                     </div>

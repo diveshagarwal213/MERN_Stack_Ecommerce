@@ -1,0 +1,122 @@
+@import '../../utils/scss/mixin.scss';
+
+#user_profile{
+    padding: 1%;
+    font-family: Arial, Helvetica, sans-serif;
+    h1,h2,h3{
+        font-weight: 300;
+    }
+}
+
+#user_address{
+    margin: 10px 0px;
+    border-radius: 17px;
+    box-shadow: var(--box-shadow);
+    padding: 1%;
+    h2{
+        color: var(--icons-color);
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        font-size: large;
+        input{
+            font-size: large;
+            padding: 5px;
+        }
+        div{
+            //border: 1px solid red;
+            display: flex;
+            text{
+                width: 50%
+            }
+            input{
+                width: 50%
+            }
+
+            button{
+                @include buttonTheme;
+                margin: 10px;
+            }
+        }
+        
+    }
+}
+
+#user_heading{
+    //border: 1px solid red;
+    position: relative;
+    padding: 1%;
+    h2{
+        font-size: xx-large;
+        line-height: 1;
+        text-transform: capitalize;
+        margin: 0;
+        padding: 0;
+    }
+    p{
+        font-size: normal;
+        margin: 0;
+        padding: 0px 20px;
+        font-size: large
+        
+    }
+
+    button{
+        @include buttonTheme;
+        position:  absolute;
+        top: 10px;
+        right: 10px;
+        font-size: large;
+
+    }
+
+}
+
+#your_orders{
+    //border: 1px solid red;
+    padding: 1%;
+}
+.your_orders_card{
+    box-shadow: var(--box-shadow);
+    border-radius: 7px;
+    margin: 20px 0px;
+    display: flex;
+    font-size: large;
+    >div{
+        //border: 1px solid yellow;
+        width: 50%;
+        padding: 1%;
+    }
+}
+.YourOrderItemsCard_upper_div{
+    display: flex;
+}
+
+.YourOrderItemsCard{
+    box-shadow: var(--box-shadow);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1%;
+    margin-left: 20px;
+    height: fit-content;
+    div{
+        width: 100px;
+        background-size: cover;
+        height: 100px;
+    }
+    p{
+        margin: 5px 0px;
+        text-transform: capitalize;
+    }
+}
+@media only screen and (max-width: 600px){
+    .your_orders_card{
+        flex-direction: column;
+    }
+    .YourOrderItemsCard{
+        margin-left: 1%;
+    }
+}
