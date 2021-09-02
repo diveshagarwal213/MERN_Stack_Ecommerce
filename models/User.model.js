@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: [true, "please provid a username"]
     },
+    userRole:{
+        type:String,
+        default:"USER"
+    },
     email: {
         type: String,
         require: [true, "please provid a email"],

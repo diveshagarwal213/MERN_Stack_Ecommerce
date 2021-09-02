@@ -1,6 +1,7 @@
 # MERN_Stack_Ecommerce (wip)
 A E-commerce project based on  MERN Stack (wip)
 [View Demo](https://peaceful-coast-33341.herokuapp.com) at Heroku.
+Use admin@gmail.com pass-01234 to login as admin refresh the page to see changes.
 
 
 #### _**IMPORTANT NOTE**_ - 
@@ -11,6 +12,7 @@ This project does not have a ENV setup. Setup the env file based on the environm
 #### _**DO Same For Other Environement Variables**_ -
 
 - JWT_KEY=(64 bytes)
+- NODE_ENV=development
 
 ## Getting Started
 This repository aims to assist you on a e-commerce MERN stack application. To get started make a copy of this template repo for your project teams.

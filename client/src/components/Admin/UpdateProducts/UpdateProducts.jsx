@@ -8,6 +8,11 @@ import { toast } from "react-toastify";
 
 
 const UpdateProducts = () => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }
      
     const [singleProduct, setsingleProduct] = useState({
         name: "",
@@ -80,7 +85,7 @@ const UpdateProducts = () => {
         //console.log(Array.from(Data));
 
         try {
-            const result = await axios.post(`/admin/updateproduct`, Data);
+            const result = await axios.post(`/admin/updateproduct`, Data, config);
             //console.log(result);
             toast.success("Product Updated!")
             resetform();
@@ -95,7 +100,7 @@ const UpdateProducts = () => {
 
     const deleteHandler = async() => {
        try {
-        const deleteProduct = await axios.get(`/admin/deleteproduct/${singleProduct._id}`);
+        const deleteProduct = await axios.get(`/admin/deleteproduct/${singleProduct._id}`,config);
         console.log(deleteProduct);
         toast.success("Product Deleted")
         resetform();

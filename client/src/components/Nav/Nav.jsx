@@ -3,15 +3,24 @@ import './nav.scss'
 import { navSvg , homeSvg, shopSvg, userProfileSvg, basketSvg, adminSvg } from './NavSvgs'
 import { Link ,NavLink } from 'react-router-dom';
 import NavItem from './NavItem'
-import { useContext } from 'react';
-
+import { useContext, useEffect, useState } from 'react';
+import { rootUserData } from '../../utils/ClientOther';
 import {CartContext} from '../../App';
 
 
 const Nav = () => {
   const cartContext = useContext(CartContext);
   const cartitems = cartContext.cartState;
-
+  const user = rootUserData(true);
+  const [isAdmin, setIsAdmin] = useState(false); 
+  
+  useEffect(()=>{
+    if(user){
+      if(user.role === "ADMIN"){
+        setIsAdmin(true);
+      }
+    }
+  },[]);
   return (
     <>
       <nav id="navbar">
@@ -36,8 +45,8 @@ const Nav = () => {
                 <span className="linkText">Cart</span>
             </NavLink>
           </li>
-          
-          <NavItem linkText="Admin" linkAddress="/admin1" iconSvg={adminSvg}/>
+          {isAdmin  ? (<NavItem linkText="Admin" linkAddress="/admin1" iconSvg={adminSvg}/>) : ("")}
+
           <NavItem linkText="User" linkAddress="/userprofile" iconSvg={userProfileSvg}/>
 
           

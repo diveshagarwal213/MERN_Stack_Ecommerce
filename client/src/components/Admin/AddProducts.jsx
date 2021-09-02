@@ -4,6 +4,11 @@ import placeholder from '../../images/placeholder.png'
 import { toast } from "react-toastify";
 
 const AddProducts = () => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }
     
     const [ src, setImg] = useState(placeholder)
     const [fileData, setFileData] = useState();
@@ -49,7 +54,7 @@ const AddProducts = () => {
         //console.log(Array.from(Data));
         
        try {
-        const result = await axios.post(`/admin/addproduct`, Data);
+        const result = await axios.post(`/admin/addproduct`, Data, config);
         //console.log(result.data);
         toast.success("Product Saved!")
 

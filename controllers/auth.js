@@ -8,7 +8,8 @@ const createRootUser =  (userData) => {
     return {
         email: userData.email,
         username: userData.username,
-        address: userData.address
+        address: userData.address,
+        role: userData.userRole
     }
 };
 

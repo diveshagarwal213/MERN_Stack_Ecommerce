@@ -6,6 +6,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "client": "cd client && npm start",
+    "clientbuild":"cd client && npm run build",
     "dev": "concurrently -n 'server,client' -c 'white,blue' \"nodemon server.js\" \"npm run client\"",
     "playground": "cd test && node playGround.js",
     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"

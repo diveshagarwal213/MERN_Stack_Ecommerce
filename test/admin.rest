@@ -16,6 +16,8 @@ GET http://localhost:5000/admin/deleteproduct/60c998e82f938e20b446082a HTTP/1.1
 ### fetch orders
 GET http://localhost:5000/admin/fetchorders HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTdlY2I5NjBlY2IxMGZjY2RlMzQwZSIsImlhdCI6MTYzMDU1OTcwMSwiZXhwIjoxNjMzMTUxNzAxLCJpc3MiOiJsb2NhbGhvc3QuY29tIiwianRpIjoiMTYzMDU1OTcwMTM1Ny1kNDg0NDExODFlYWExNTMzNWE4YmVjNjkifQ.9h_-OSrFWo1AOL39jS8J8gW5llz6Nijpo3i9l0Wub74 
+
 
 ###
 //CONFIRM (true) => PENDING => DELIVERY && (PENDING_PAYMENT //if cash payment) => COMPLETE 

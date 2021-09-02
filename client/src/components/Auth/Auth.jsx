@@ -11,6 +11,9 @@ const Auth =  () => {
     return(
         <div id='auth'>
             <div id="auth_inner_div" >
+                {authNav === "LOGIN" ? (
+                    <button onClick={() => setauthNav("REGISTER")} >Rigister</button>
+                ) : (<button onClick={() => setauthNav("LOGIN")} >Login</button>)}
                 <div id="auth_content_div">
                     {authNav === "LOGIN" ? (<Login />) : ("")}
                     {authNav === "REGISTER" ? (<SignUp />) : ("")}
@@ -19,7 +22,7 @@ const Auth =  () => {
                     {authNav === "LOGIN" ? (
                         <button className="btn" onClick={() => setauthNav("REGISTER")}> {RegisterSvg} </button>
                     ) : (
-                        <button className="btn" onClick={() => setauthNav("LOGIN")}>  {LoginSvg} </button>
+                        <button className="btn" onClick={() => setauthNav("LOGIN")}>  {LoginSvg } </button>
                     )}
                 </div>
             </div>

@@ -20,29 +20,31 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
-//production
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname,"/client/build")));
-
-    app.get("/", (req,res) => {
-        res.sendFile(path.join(__dirname,'client','build', 'index.html'));
-    });
-}else{
-    app.get('/',(req,res)=>{
-        res.send("Api Running")
-    });
-}
-
 //routes
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/public', require('./routes/public.routes'));
 app.use('/admin', require('./routes/admin.routes'));
 app.use('/private', require('./routes/private.routes'));
 
-//404 routes 
+//production
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname,"/client/build")));
+
+    app.get("*", (req,res) => {
+        res.sendFile(path.join(__dirname,'client','build', 'index.html'));
+    });
+    
+}else{
+    app.get('/',(req,res)=>{
+        res.send("Api Running")
+    });
+}
+
+//404 routes (will not work in production react handel 404) 
 app.use(async (req,res,next) => {
     next(creatErr.NotFound());//http-error
 });
+
 //error handler
 app.use((err,req,res,next) => {
     
@@ -54,7 +56,6 @@ app.use((err,req,res,next) => {
         },
     });
 });
-
 
 
 //listen

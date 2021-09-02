@@ -6,8 +6,8 @@ import {Link} from 'react-router-dom';
 
 const config ={
     headers: {
-        "Content-Type": "application/json"
-        //Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }
 }
 
@@ -131,7 +131,7 @@ const Orders = () => {
 
     const SetOrderForUpdate = async (order) =>{
         try {
-            const result = await axios.get(`/admin/fetchsingleuser/${order.userId}`);
+            const result = await axios.get(`/admin/fetchsingleuser/${order.userId}`,config);
             if(result.data){
                 setUserDetails(result.data);
             }
@@ -145,7 +145,7 @@ const Orders = () => {
 
     const fetchallOrders = async () =>{
         try {
-            const result = await axios.get(`/admin/fetchorders`);
+            const result = await axios.get(`/admin/fetchorders`,config);
             //console.log(result);
             if(result.data){
                 const {
