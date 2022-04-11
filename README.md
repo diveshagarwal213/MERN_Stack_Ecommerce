@@ -3,6 +3,7 @@ A E-commerce project based on  MERN Stack (wip)
 [View Demo](https://peaceful-coast-33341.herokuapp.com) at Heroku.
 Use admin@gmail.com pass-01234 to login as admin refresh the page to see changes.
 
+![city cake](https://diveshagarwal213.github.io/my_portfolio/images/city1.PNG)
 
 #### _**IMPORTANT NOTE**_ - 
 This project does not have a ENV setup. Setup the env file based on the environments below.
